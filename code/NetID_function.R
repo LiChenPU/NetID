@@ -1,7 +1,7 @@
 # !diagnostics off
 # Import library ####
 
-{
+{ 
   # devtools::install_github("LiChenPU/Formula_manipulation")
   library(lc8)
   library(enviPat)
