@@ -1,7 +1,7 @@
 # !diagnostics off
 # Import library ####
 
-{ 
+{
   # devtools::install_github("LiChenPU/Formula_manipulation")
   library(lc8)
   library(enviPat)
@@ -1314,7 +1314,7 @@ propagate_heterodimer = function(new_nodes_df, sf, EdgeSet_heterodimer, NodeSet,
                                                       transform = rep(temp$transform, length(transform$formula)),
                                                       node2 = rep(temp$node2, length(transform$formula)),
                                                       parent_formula = rep(temp$parent_formula, length(transform$formula)),
-                                                      formula = my_calculate_formula(temp$formula, transform$formula),
+                                                      formula = as.vector(my_calculate_formula(temp$formula, transform$formula)),
                                                       rdbe = temp$rdbe + transform$rdbe,
                                                       mass = temp$mass + transform$mass)
     
@@ -2058,7 +2058,8 @@ Score_structureset_missing_isotope = function(StructureSet_df, NodeSet, EdgeSet_
     temp_missing_isotope_ls[[length(temp_missing_isotope_ls)+1]] = temp_missing_isotope
   }
   
-  structureset_missing_isotope = Reduce(full_join, temp_missing_isotope_ls)
+  structureset_missing_isotope = suppressMessages(
+    Reduce(full_join, temp_missing_isotope_ls))
   
 }
 
@@ -2165,8 +2166,8 @@ Score_structure_propagation = function(StructureSet_df,
   
   structure_propagation = structure_propagation %>% 
     dplyr::select(struct_set_id, score_propagation)
-  StructureSet_df2 = Reduce(left_join, list(StructureSet_df, 
-                                            structure_propagation))
+  StructureSet_df2 = suppressMessages(Reduce(left_join, list(StructureSet_df, 
+                                            structure_propagation)))
 }
 
 # initiate_ilp_nodes ####

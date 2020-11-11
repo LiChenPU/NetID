@@ -3,7 +3,7 @@
   setwd(dirname(rstudioapi::getSourceEditorContext()$path))
   source("NetID_function.R")
   
-  work_dir = "Sc_neg"
+  work_dir = "../Sc_neg/"
   setwd(work_dir)
   printtime = Sys.time()
   timestamp = paste(unlist(regmatches(printtime, gregexpr("[[:digit:]]+", printtime))),collapse = '')
@@ -140,8 +140,6 @@
   print(paste("Complexity is", CplexSet$para$nc, "variables and", CplexSet$para$nr, "constraints."))
   print(sapply(CplexSet$para, length))
 }
-print(Sys.time()-printtime)
-save.image(paste0(timestamp,".RData"))
 
 # Run optimization ####
 {
@@ -171,6 +169,13 @@ save.image(paste0(timestamp,".RData"))
           file = paste(timestamp, "output.RData", sep="_"))
 }
 
+# Output ####
+{
+  NetID_output =  CplexSet$ilp_nodes %>% 
+    filter(ilp_solution == 1)
+  write.csv(NetID_output,"NetID_output.csv", row.names = F, na="")
+}
+
 save.image(paste0(timestamp,".RData"))
 print("total run time")
 print(Sys.time()-printtime)
@@ -179,14 +184,9 @@ print(Sys.time()-printtime)
 {
   test = CplexSet$ilp_nodes %>%
     filter(node_id == 5115)
-  NetID_output =  CplexSet$ilp_nodes %>% 
-    filter(ilp_solution == 1)
-  write.csv(NetID_output,"NetID_output.csv", row.names = F, na="")
+
   test = NetID_output %>%
     filter(grepl("Ni", formula))
-  
-  
 }
-
 
 
