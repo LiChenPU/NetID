@@ -1,0 +1,21 @@
+category,name,formula,SMILES,note,rt
+Adduct,Rare adduct,C7Cl1H13O7,,,
+Adduct,Rare adduct,B1C6H13O10Si1,,,
+Adduct,Rare adduct,B1C12H19O12,,,
+Metabolite,Farnesyl phosphate,C15H27O4P,CC(=CCCC(=CCCC(=CCOP(=O)(O)O)C)C)C,10357552,7.1
+Metabolite,DI(N-Acetyl-D-glucosamine) ,C16H28N2O11,CC(=O)NC1C(C(C(OC1O)CO)OC2C(C(C(C(O2)CO)O)O)NC(=O)C)O,439326,13.01
+Adduct,DI(N-Acetyl-D-glucosamine) + HNO3,C16H29N3O14,,439326,13.01
+Adduct,DI(N-Acetyl-D-glucosamine) + HCl,C16H29N2O11Cl1,,439326,13.01
+Metabolite,C18:1,C18H34O2,,,2.435506
+Metabolite,C16:0,C16H32O2,,,2.469723
+Metabolite,C16:1,C16H30O2,,,2.482167
+Metabolite,Lumichrome,C12H10N4O2,CC1=CC2=C(C=C1C)N=C3C(=N2)C(=O)NC(=O)N3,5326566,
+Adduct,"detergent, 3-Dodecyl-2-(4-sulfophenoxy)benzenesulfonic acid",C24H34O7S2,CCCCCCCCCCCCC1=C(C(=CC=C1)S(=O)(=O)O)OC2=CC=C(C=C2)S(=O)(=O)O,170294,
+Adduct,"detergent, 2-(4-sulfophenoxy)-3-undecylbenzenesulfonic acid",C23H32O7S2,CCCCCCCCCCCC1=C(OC2=CC=C(S(=O)(O)=O)C=C2)C(S(=O)(O)=O)=CC=C1,,
+Adduct,HCrO4,H1Cr1O4,,,
+Adduct,H2CrO3,H2Cr1O3,,,
+Adduct,C2CuN2,C2Cu1N2,,,
+Adduct,Column material,C6H17O5Si2,,,
+Adduct,Column material,C8H26O5Si4,,,
+Adduct,Column material,C4H14O3Si2,,,
+Adduct,Column material,C6H20O4Si3,,,
