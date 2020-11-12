@@ -2191,6 +2191,15 @@ initiate_ilp_nodes = function(StructureSet_df){
                  dplyr::select(node_id, Input_id, log10_inten, medMz, medRt)) %>%
     dplyr::select(ilp_node_id, everything()))
   
+  for(i in 1:ncol(ilp_nodes)){
+    newval = ilp_nodes[,i]
+    if(length(class(newval))!=1){
+      ilp_nodes[,i] = class(newval[1])
+    }
+  }
+  
+  ilp_nodes
+  
   # hist(ilp_nodes$score_sum)
 }
 
@@ -4472,6 +4481,7 @@ initiate_g_met = function(CplexSet){
   ilp_nodes_met = CplexSet$ilp_nodes %>%
     filter(class %in% c("Metabolite", "Putative metabolite")) %>%
     dplyr::select(ilp_node_id, everything())
+  
   ilp_edges_met = CplexSet$ilp_edges %>%
     filter(category == "Biotransform") %>%
     mutate(direction = ifelse(direction >= 0, 1, -1)) %>%

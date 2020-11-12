@@ -1,9 +1,10 @@
 # Main Codes ####
+# Setting path ####
 {
   setwd(dirname(rstudioapi::getSourceEditorContext()$path))
   source("NetID_function.R")
   
-  work_dir = "../Sc_neg/"
+  work_dir = "../Mouse_liver_neg/"
   setwd(work_dir)
   printtime = Sys.time()
   timestamp = paste(unlist(regmatches(printtime, gregexpr("[[:digit:]]+", printtime))),collapse = '')
@@ -17,7 +18,7 @@
                     ion_mode = -1 # 1 for pos mode and -1 for neg mode
                     )
   Mset = read_MS2data(Mset,
-                      MS2_folder = "") # MS2_neg_200524_test
+                      MS2_folder = "MS2_neg_200524") # MS2_neg_200524
 }
 
 # Data cleaning ####
@@ -166,7 +167,7 @@
   CplexSet = path_annotation(CplexSet, NetworkSet, solution = "ilp_solution")
   
   save(CplexSet,StructureSet_df,LibrarySet,NetworkSet,
-          file = paste(timestamp, "output.RData", sep="_"))
+          file = paste("NetID", "output.RData", sep="_"))
 }
 
 # Output ####
@@ -176,7 +177,7 @@
   write.csv(NetID_output,"NetID_output.csv", row.names = F, na="")
 }
 
-save.image(paste0(timestamp,".RData"))
+save.image()
 print("total run time")
 print(Sys.time()-printtime)
 
