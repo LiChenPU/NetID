@@ -438,9 +438,8 @@ expand_library = function(lib, rule, direction, category){
   parent_lib = lib$formula
   transformation_rule = rule$formula
   
-  expansion = merge(parent_lib, transformation_rule, all=T) %>%
-    dplyr::rename(parent_formula = x,
-                  transform = y) %>%
+  expansion = data.frame(parent_formula = rep(parent_lib, length(transformation_rule)),
+                         transform = rep(transformation_rule, each = length(parent_lib))) %>%
     mutate(parent_formula = as.character(parent_formula),
            transform = as.character(transform),
            mass = as.vector(mass_exp),
@@ -2182,7 +2181,7 @@ initiate_ilp_nodes = function(StructureSet_df){
       mutate(sum_score = score_sum) 
   }
   
-  ilp_nodes = StructureSet_df %>%
+  ilp_nodes = suppressMessages(StructureSet_df %>%
     arrange(node_id, -sum_score, steps, category) %>%
     distinct(node_id, formula, class, .keep_all=T) %>%
     arrange(node_id) %>%
@@ -2190,7 +2189,7 @@ initiate_ilp_nodes = function(StructureSet_df){
     inner_join(Mset$Data %>% 
                  dplyr::rename(node_id=id) %>%
                  dplyr::select(node_id, Input_id, log10_inten, medMz, medRt)) %>%
-    dplyr::select(ilp_node_id, everything())
+    dplyr::select(ilp_node_id, everything()))
   
   # hist(ilp_nodes$score_sum)
 }
