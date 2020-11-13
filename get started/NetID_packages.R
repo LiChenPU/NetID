@@ -1,6 +1,6 @@
 netid_packages <- function(){
   
-  netid_pkgs <- c("tidyverse","enviPat","slam","readr","stringi","stringr",
+  netid_pkgs <- c("tidyverse","enviPat","slam","readr","stringi","stringr","fitdistrplus",
                   "pracma","readxl","igraph","janitor","tictoc")
   
   list_installed <- installed.packages()
