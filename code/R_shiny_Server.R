@@ -1,7 +1,6 @@
 ## server ##
 server <- function(input, output, session) {
-  
-  
+
   # top part - Peak list ####
   {
     peak_list <- reactive({
@@ -29,6 +28,7 @@ server <- function(input, output, session) {
   {
     ## selected peak ####
     node_selected <- reactive({
+      req(input$peak_id)
       print("enter node_selected")
       req(is.numeric(as.numeric(input$peak_id)))
       node_selected = ilp_nodes %>%
@@ -274,6 +274,8 @@ server <- function(input, output, session) {
         shinyjs::show(id = "previous_struct", time = 0)
         shinyjs::show("next_struct")
         shinyjs::show("struct_num")
+        shinyjs::show("download_csv")
+        shinyjs::show("download_html")
         structure_plot_counter(1)
       })
       
@@ -282,6 +284,8 @@ server <- function(input, output, session) {
         shinyjs::hide("previous_struct")
         shinyjs::hide("next_struct")
         shinyjs::hide("struct_num")
+        shinyjs::hide("download_csv")
+        shinyjs::hide("download_html")
       })
       
       observeEvent(input$struct_num, {
@@ -313,6 +317,54 @@ server <- function(input, output, session) {
       
     }
   }
+  # Download ####
+  {
+    # Downloadable csv of selected dataset ----
+    output$download_csv <- downloadHandler(
+      filename = function() {
+        req(input$peak_id)
+        paste(input$peak_id, ".csv", sep = "")
+      },
+      content = function(file) {
+        write.csv(structure_table() %>%
+                    dplyr::select(class, annotation, origin, note), file, row.names = FALSE)
+      }
+    )
+    
+    output$download_html <- downloadHandler(
+      filename = function() {
+        req(input$peak_id)
+        paste("network_", input$peak_id, ".html", sep = "")
+      },
+      content = function(con) {
+        Plot_g_interest(g_interest(), 
+                              query_ilp_node = isolate(query_ilp_id()), 
+                              show_node_labels = input$node_labels, 
+                              show_edge_labels = input$edge_labels,
+                              log_inten_cutoff = 0) %>% 
+          visSave(con)
+        
+      }
+    )
+    
+  }
+  
+  # Failed attempt ####
+  # # Input file ###
+  # {
+  #   # infile = reactiveValues()
+  #   # reactiveValues is like a list 
+  #   observeEvent(
+  #     req(input$file),{
+  #       infile = reactiveValues(v=readRDS(input$file$datapath))
+  #       print(infile$v$CplexSet$para$nc)
+  #     })
+  # }
+  # 
+  # # Initiate global parameters
+  # {
+  #   
+  # }
 }
 
 

@@ -5,10 +5,10 @@ source('R_shiny_functions.R')
 # options(digits = 8)
 
 # Read in files ####
-datapath = "./Sc_neg"
+datapath = "../Sc_neg"
 
 setwd(datapath)
-filename = "20201103114511_output.RData" # Sc_neg
+filename = "NetID_output.RData" 
 load(filename)
 
 # Global parameter in the background ####
@@ -34,9 +34,7 @@ load(filename)
     arrange(ilp_node_id, -rank_score) %>%
     # distinct(ilp_node_id, .keep_all = T) %>%
     filter(T)
-  
 }
-
 
 ## Run shiny ####
 {
@@ -50,14 +48,6 @@ load(filename)
   app = shinyApp(ui = ui, server = server)
   runApp(app)
   # shiny::reactlogShow() # Run after closing the app
-  
-  ## To do ####
-  # Add the output button
-  
-  # fix a minor bug where ilp_node_id = 3106 
-  ## Column `from` can't be converted from numeric to character
-  
-  
 }
 
 

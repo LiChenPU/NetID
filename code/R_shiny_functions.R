@@ -15,6 +15,8 @@
   library(enviPat)
   library(lc8)
   data("isotopes")
+  
+  options(shiny.maxRequestSize=1*1024^3)
 }
 
 # function ####
@@ -22,6 +24,9 @@
 ## show_peak_list ####
 show_peak_list = function(ilp_nodes, input_interest, ion_form, mz_ppm){
   
+  if(is.null(ilp_nodes)){
+    return(NULL)
+  }
   ilp_nodes_filter = ilp_nodes %>%
     filter(ilp_solution > 1e-6) %>%
     dplyr::select(node_id, medMz, medRt, log10_inten, class, formula, ppm_error) %>%

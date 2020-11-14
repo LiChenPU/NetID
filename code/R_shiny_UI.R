@@ -5,6 +5,14 @@ ui <- tagList(
   navbarPage(
     theme = shinytheme("cerulean"), # other theme can be viewed from themeSelector()
     "NetID",
+    ## Input file tab ####
+    # tabPanel("Input file",
+    #   fileInput("file", "Choose NetID_output rds File",
+    #             multiple = FALSE,
+    #             accept = NULL)
+    #          
+    # ),
+    
     ## Peak list tab ####
     tabPanel("Peak list",
       ## sidebarPanel ####
@@ -24,6 +32,8 @@ ui <- tagList(
                  numericInput(inputId = "mz_ppm", 
                               label = "ppm",
                               value = 3)
+                 
+                 
                  )
                
         ),
@@ -86,6 +96,7 @@ ui <- tagList(
                         
                         ),
                  hr(),
+                 downloadButton("download_html", "Download plot"),
                  column(12,
                         visNetworkOutput("Network_plot", width = "100%",  height = "750px")
                  )
@@ -103,21 +114,24 @@ ui <- tagList(
                               dblclick = dblclickOpts(id = "struct_plot_dblclick")),
                    
                  textOutput("struct_annotation"),
-                 
-                 column(2, offset = 3, 
+                 # Offset with previous section
+                 column(2, offset = 1, 
                         actionButton("previous_struct", "<-")),
                  column(2, offset = 0, 
                         actionButton("next_struct", "->")),
-                 column(2, 
+                 column(2, offset = 0,
                         selectInput(inputId = "struct_num",
                                     label = NULL,
                                     choices = numeric(0))),
+                 column(2, offset = 1,
+                        # Download Button
+                        downloadButton("download_csv", "Download csv")
+                        ),
                  
                  DT::dataTableOutput("structure_list")
-               ))
-        )
-      ) # End of lower graph
-    ) # End of tabPanel
+               )))
+        ) # End of lower graph ####
+    ) # End of tabPanel 
   ), # End of navbarPage
   
   tags$style(type='text/css', "#plot_network { width: 100%; color: #000000; margin-top: 25px;}")
