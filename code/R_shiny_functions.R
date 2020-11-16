@@ -32,21 +32,21 @@ show_peak_list = function(ilp_nodes, input_interest, ion_form, mz_ppm){
     dplyr::select(node_id, medMz, medRt, log10_inten, class, formula, ppm_error) %>%
     dplyr::rename(peak_id = node_id)
   
-  mz_adjust = 0
+  mz_interest = 0
   if(!is.na(as.numeric(input_interest))){
     mz_interest = as.numeric(input_interest)
-    if(ion_form == "M"){mz_adjust = mz_interest}
-    if(ion_form == "M+H"){mz_adjust = mz_interest - 1.007276}
-    if(ion_form == "M-H"){mz_adjust = mz_interest + 1.007276}
   } else {
     input_interest = gsub(" ", "", input_interest)
     formula_check = enviPat::check_chemform(isotopes, input_interest)
     if(!formula_check$warning){
-      mz_adjust = formula_mz(formula_check$new_formula)
+      mz_interest = formula_mz(formula_check$new_formula)
     } 
   }
-    
-  if(mz_adjust != 0){
+  
+  if(mz_interest != 0){
+    if(ion_form == "M"){mz_adjust = mz_interest}
+    if(ion_form == "M+H"){mz_adjust = mz_interest - 1.007276}
+    if(ion_form == "M-H"){mz_adjust = mz_interest + 1.007276}
     ilp_nodes_filter = ilp_nodes_filter %>%
       filter(abs(medMz - mz_adjust) < medMz * mz_ppm * 1e-6)
   }
@@ -361,7 +361,7 @@ Plot_g_interest = function(g_interest, query_ilp_node,
       # assigned to the first color, not overwitten by later assignment
       id == as.character(query_ilp_node) ~ my_palette[4],
       class == "Metabolite" ~ my_palette[1],
-      class == "Putative Metabolite" ~ my_palette[2],
+      class == "Putative metabolite" ~ my_palette[2],
       class == "Artifact" ~ my_palette[3],
       class == "Unknown" ~ "#666666"
     )) %>%
@@ -373,7 +373,6 @@ Plot_g_interest = function(g_interest, query_ilp_node,
                           "RT:", round(medRt,2), "<br>",
                           "TIC:", format(signif(10^log10_inten,5), scientific = T))
     )
-  
   
   
   if(show_node_labels){
@@ -414,7 +413,6 @@ Plot_g_interest = function(g_interest, query_ilp_node,
     visIgraphLayout(layout = "layout_with_fr",
                     randomSeed = 1234)
 
-  # visSave(test, "thiamine.html")
   
 }
 ## my_SMILES2structure ####

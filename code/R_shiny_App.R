@@ -51,4 +51,3 @@ source('R_shiny_functions.R')
   # shiny::reactlogShow() # Run after closing the app
 }
 
-
