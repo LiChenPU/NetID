@@ -1,15 +1,16 @@
-
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 source('R_shiny_functions.R')
 
 # options(digits = 8)
 
 # Read in files ####
-datapath = "../Sc_neg"
-
-setwd(datapath)
-filename = "NetID_output.RData" 
-load(filename)
+{
+  datapath = "../Sc_neg"
+  
+  setwd(datapath)
+  filename = "NetID_output.RData" 
+  load(filename)
+}
 
 # Global parameter in the background ####
 {

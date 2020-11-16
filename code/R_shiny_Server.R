@@ -244,7 +244,7 @@ server <- function(input, output, session) {
         print("enter output$structure_list")
         structure_table() %>%
           dplyr::select(class, annotation, origin, note)
-      }, options = list(pageLength = 5),
+      }, options = list(pageLength = 10),
       fillContainer = F,
       rownames = TRUE
       )

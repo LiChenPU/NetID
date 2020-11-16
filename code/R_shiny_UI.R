@@ -51,6 +51,7 @@ ui <- tagList(
       
       fluidRow(
         ## Network plot and options ####
+        ## Network buttons ###
         column(6, 
                wellPanel(
                  fluidRow(
@@ -96,16 +97,19 @@ ui <- tagList(
                         
                         ),
                  hr(),
-                 downloadButton("download_html", "Download plot"),
-                 column(12,
-                        visNetworkOutput("Network_plot", width = "100%",  height = "750px")
-                 )
-               ))
-          
-          
+                 column(3,
+                        downloadButton("download_html", "Download plot")),
+
+               )),
+               wellPanel(
+                 visNetworkOutput("Network_plot", width = "100%",  height = "750px")
+               )
         ),
         
-        
+        ## Network plots ###
+        # column(6,
+        #        visNetworkOutput("Network_plot", width = "100%",  height = "750px")
+        # ),
         
         ## Structure ####
         column(6,
