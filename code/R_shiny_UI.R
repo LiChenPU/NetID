@@ -98,7 +98,7 @@ ui <- tagList(
                         ),
                  hr(),
                  column(3,
-                        downloadButton("download_html", "Download plot")),
+                        downloadButton("download_html", "Download plot"))
 
                )),
                wellPanel(
