@@ -4910,4 +4910,28 @@ Initiate_networkset = function(CplexSet, StructureSet_df, LibrarySet,
               g_all_valid = g_all_valid))
 }
 
+# Output ####
+get_NetID_output = function(ilp_nodes, simplified = T){
+  
+  NetID_output = CplexSet$ilp_nodes %>% 
+    filter(ilp_solution > 1e-6) %>%
+    mutate(medMz = signif(medMz, 7),
+           medRt = round(medRt, 2),
+           log10_inten = round(log10_inten, 2),
+           ppm_error = (mass-medMz)/medMz*1e6,
+           ppm_error = round(ppm_error, 2)) %>%
+    dplyr::rename(peak_id = node_id,
+                  annotation = path)
+  
+  if(simplified){
+    NetID_output = NetID_output %>%
+      dplyr::select(peak_id, medMz, medRt, log10_inten, class, formula, ppm_error, annotation)
+  }else{
+    NetID_output = NetID_output %>%
+      dplyr::select(peak_id, medMz, medRt, log10_inten, class, formula, ppm_error, annotation, 
+                    everything())
+  }
+  
+  NetID_output
+}
 # ---- End ---- ####

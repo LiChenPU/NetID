@@ -172,8 +172,7 @@
 
 # Output ####
 {
-  NetID_output =  CplexSet$ilp_nodes %>% 
-    filter(ilp_solution == 1)
+  NetID_output =  get_NetID_output(CplexSet$ilp_nodes, simplified = T)
   write.csv(NetID_output,"NetID_output.csv", row.names = F, na="")
 }
 
