@@ -98,8 +98,11 @@ ui <- tagList(
                         ),
                  hr(),
                  column(3,
-                        downloadButton("download_html", "Download plot"))
+                        downloadButton("download_html", "Download plot")),
 
+                 column(3,
+                        downloadButton("download_plot_csv", "Download csv"))
+                 
                )),
                wellPanel(
                  visNetworkOutput("Network_plot", width = "100%",  height = "750px")

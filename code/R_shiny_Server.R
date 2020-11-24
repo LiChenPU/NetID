@@ -232,12 +232,25 @@ server <- function(input, output, session) {
         req(query_ilp_id())
         if(structure_table_trigger() == "plot_network"){
           print(query_ilp_id())
-          core_annotation %>%
-            filter(ilp_node_id == query_ilp_id())
+          output_annotation_id = query_ilp_id()
         } else if(structure_table_trigger() == "click"){
-          core_annotation %>%
-            filter(ilp_node_id == input$click)
+          print(input$click)
+          output_annotation_id = input$click
         }
+        if(ilp_nodes$steps[ilp_nodes$ilp_node_id == output_annotation_id] == 0){
+          output_annotation = core_annotation %>%
+            arrange(-rank_score)
+        } else{
+          output_annotation = ilp_nodes %>%
+            dplyr::rename(annotation = path) %>%
+            mutate(origin = "",
+                   note = "",
+                   SMILES = "")
+        }
+        
+        output_annotation %>%
+          filter(ilp_node_id == output_annotation_id) %>%
+          distinct(class, annotation, origin, note, .keep_all=T)
       })
       
       output$structure_list <- DT::renderDataTable({
@@ -276,6 +289,7 @@ server <- function(input, output, session) {
         shinyjs::show("struct_num")
         shinyjs::show("download_csv")
         shinyjs::show("download_html")
+        shinyjs::show("download_plot_csv")
         structure_plot_counter(1)
       })
       
@@ -286,6 +300,7 @@ server <- function(input, output, session) {
         shinyjs::hide("struct_num")
         shinyjs::hide("download_csv")
         shinyjs::hide("download_html")
+        shinyjs::hide("download_plot_csv")
       })
       
       observeEvent(input$struct_num, {
@@ -346,6 +361,21 @@ server <- function(input, output, session) {
         
       }
     )
+    
+    output$download_plot_csv <- downloadHandler(
+      filename = function() {
+        req(input$peak_id)
+        paste("network_", input$peak_id, ".csv", sep = "")
+      },
+      content = function(file) {
+        write.csv(download_g_interest(g_interest(), 
+                                      query_ilp_node = isolate(query_ilp_id())), file, row.names = FALSE)
+        
+        
+        
+      }
+    )
+    
     
   }
   

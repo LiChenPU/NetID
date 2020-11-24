@@ -415,6 +415,26 @@ Plot_g_interest = function(g_interest, query_ilp_node,
 
   
 }
+## download_g_interest #### 
+download_g_interest = function(g_interest, query_ilp_node){
+  if(!is.igraph(g_interest)){
+    print("g_interest is not a graph")
+    return(NULL)
+  }
+  
+  my_palette = brewer.pal(5, "Set3")
+  nodes = igraph::as_data_frame(g_interest, "vertices") %>%
+    pull(name)
+  
+  ilp_nodes %>%
+    filter(ilp_node_id %in% as.numeric(nodes)) %>%
+    dplyr::rename(peak_id = node_id,
+                  annotation = path) %>%
+    dplyr::select(peak_id, medMz, medRt, log10_inten, class, formula, ppm_error, annotation, 
+                  everything())
+    
+}
+
 ## my_SMILES2structure ####
 my_SMILES2structure = function(SMILES){
   SDF = try(smiles2sdf(SMILES), silent=T)
