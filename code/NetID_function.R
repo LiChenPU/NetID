@@ -899,6 +899,7 @@ Multicharge_isotope_connection = function(EdgeSet, EdgeSet_oligomer_multicharge)
     filter(linktype.parent == linktype.isotope) %>%
     mutate(linktype = mapply(my_calculate_formula, linktype, linktype, 
                              sign = -(linktype.parent-1)/linktype.parent)) %>%
+    mutate(linktype = as.character(linktype)) %>%
     mutate(node1 = node1.parent,
            node2 = node1.isotope,
            category = "Multicharge_isotope") %>%
@@ -1160,11 +1161,12 @@ Expand_edgeset = function(EdgeSet,
   }
   
   EdgeSet_expand = bind_rows(EdgeSet_ring_artifact, 
-                                 EdgeSet_oligomer_multicharge, 
+                                 EdgeSet_oligomer_multicharge,
                                  EdgeSet_multicharge_isotope,
                                  EdgeSet_heterodimer,
                                  EdgeSet_experiment_MS2_fragment,
-                                 EdgeSet_library_MS2_fragment)
+                                 EdgeSet_library_MS2_fragment
+                             )
   # print(table(EdgeSet_expand$category))
   return(EdgeSet_expand)
 }
