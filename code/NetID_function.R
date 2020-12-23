@@ -79,6 +79,7 @@ read_files = function(
         mutate(formula = check_formula$new_formula) %>%
         mutate(formula = my_calculate_formula(formula, "C1"),
                formula = my_calculate_formula(formula, "C-1")) %>%
+        mutate(formula = as.character(formula)) %>%
         mutate(mass = formula_mz(formula),
                rdbe = formula_rdbe(formula)) %>%
         mutate(note = as.character(note))
@@ -1315,7 +1316,7 @@ propagate_heterodimer = function(new_nodes_df, sf, EdgeSet_heterodimer, NodeSet,
                                                       transform = rep(temp$transform, length(transform$formula)),
                                                       node2 = rep(temp$node2, length(transform$formula)),
                                                       parent_formula = rep(temp$parent_formula, length(transform$formula)),
-                                                      formula = as.vector(my_calculate_formula(temp$formula, transform$formula)),
+                                                      formula = as.character(my_calculate_formula(temp$formula, transform$formula)),
                                                       rdbe = temp$rdbe + transform$rdbe,
                                                       mass = temp$mass + transform$mass)
     
@@ -2196,7 +2197,9 @@ initiate_ilp_nodes = function(StructureSet_df){
   for(i in 1:ncol(ilp_nodes)){
     newval = ilp_nodes[,i]
     if(length(class(newval))!=1){
-      ilp_nodes[,i] = class(newval[1])
+      stop("ilp_nodes format error")
+      # print(i)
+      # ilp_nodes[,i] = newval
     }
   }
   
@@ -2223,7 +2226,7 @@ initiate_ilp_edges = function(EdgeSet_all, CplexSet, Exclude = ""){
     match_matrix_index_ls = list()
     
     for(i in 1:nrow(EdgeSet_df)){
-      # if(i%%1000==0)print(i)
+      # if(i%%1000==0) print(i)
       edge_id = EdgeSet_df$edge_id[i]
       category = EdgeSet_df$category[i]
       
