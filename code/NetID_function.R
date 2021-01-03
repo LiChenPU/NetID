@@ -79,6 +79,7 @@ read_files = function(
         mutate(formula = check_formula$new_formula) %>%
         mutate(formula = my_calculate_formula(formula, "C1"),
                formula = my_calculate_formula(formula, "C-1")) %>%
+        mutate(formula = as.character(formula)) %>%
         mutate(mass = formula_mz(formula),
                rdbe = formula_rdbe(formula)) %>%
         mutate(note = as.character(note))
@@ -477,19 +478,24 @@ Expand_libraryset = function(LibrarySet){
     lib_known_id = LibrarySet %>%
       filter(origin == "known_library") %>%
       pull(library_id)
+    
     lib_known = seed_library %>%
-      filter(node_id %in% lib_known_id) %>%
-      filter(category == "Metabolite")
-    
-    rule_1 = initial_rule %>% filter(category == "Biotransform") %>% filter(direction %in% c(0,1))
-    rule_2 = initial_rule %>% filter(category == "Biotransform") %>% filter(direction %in% c(0,-1))
-    
-    lib_known_1 = expand_library(lib_known, rule_1, direction = 1, category = "Metabolite")
-    lib_known_2 = expand_library(lib_known, rule_2, direction = -1, category = "Metabolite")
-    lib_met = bind_rows(lib_known_1, lib_known_2) %>%
-      filter(!grepl("-|NA", formula)) 
-    
+        filter(node_id %in% lib_known_id) %>%
+        filter(category == "Metabolite")
+      
+    if(nrow(lib_known) > 0){
+      rule_1 = initial_rule %>% filter(category == "Biotransform") %>% filter(direction %in% c(0,1))
+      rule_2 = initial_rule %>% filter(category == "Biotransform") %>% filter(direction %in% c(0,-1))
+      
+      lib_known_1 = expand_library(lib_known, rule_1, direction = 1, category = "Metabolite")
+      lib_known_2 = expand_library(lib_known, rule_2, direction = -1, category = "Metabolite")
+      lib_met = bind_rows(lib_known_1, lib_known_2) %>%
+        filter(!grepl("-|NA", formula)) 
+    } else {
+      lib_met = lib_known
     }
+    
+  }
   
   # Expanding known adducts
   {
@@ -638,6 +644,9 @@ Check_sys_error = function(NodeSet, StructureSet, LibrarySet,
                            RT_match = T){
   known_library = LibrarySet %>%
     filter(origin %in% c("known_library","manual_library"))
+  if(nrow(known_library) == 0){
+    known_library = LibrarySet
+  }
   
   node_RT = sapply(NodeSet, "[[", "RT")
   library_RT = LibrarySet$rt
@@ -899,6 +908,7 @@ Multicharge_isotope_connection = function(EdgeSet, EdgeSet_oligomer_multicharge)
     filter(linktype.parent == linktype.isotope) %>%
     mutate(linktype = mapply(my_calculate_formula, linktype, linktype, 
                              sign = -(linktype.parent-1)/linktype.parent)) %>%
+    mutate(linktype = as.character(linktype)) %>%
     mutate(node1 = node1.parent,
            node2 = node1.isotope,
            category = "Multicharge_isotope") %>%
@@ -1160,11 +1170,12 @@ Expand_edgeset = function(EdgeSet,
   }
   
   EdgeSet_expand = bind_rows(EdgeSet_ring_artifact, 
-                                 EdgeSet_oligomer_multicharge, 
+                                 EdgeSet_oligomer_multicharge,
                                  EdgeSet_multicharge_isotope,
                                  EdgeSet_heterodimer,
                                  EdgeSet_experiment_MS2_fragment,
-                                 EdgeSet_library_MS2_fragment)
+                                 EdgeSet_library_MS2_fragment
+                             )
   # print(table(EdgeSet_expand$category))
   return(EdgeSet_expand)
 }
@@ -1313,7 +1324,7 @@ propagate_heterodimer = function(new_nodes_df, sf, EdgeSet_heterodimer, NodeSet,
                                                       transform = rep(temp$transform, length(transform$formula)),
                                                       node2 = rep(temp$node2, length(transform$formula)),
                                                       parent_formula = rep(temp$parent_formula, length(transform$formula)),
-                                                      formula = as.vector(my_calculate_formula(temp$formula, transform$formula)),
+                                                      formula = as.character(my_calculate_formula(temp$formula, transform$formula)),
                                                       rdbe = temp$rdbe + transform$rdbe,
                                                       mass = temp$mass + transform$mass)
     
@@ -2194,7 +2205,9 @@ initiate_ilp_nodes = function(StructureSet_df){
   for(i in 1:ncol(ilp_nodes)){
     newval = ilp_nodes[,i]
     if(length(class(newval))!=1){
-      ilp_nodes[,i] = class(newval[1])
+      stop("ilp_nodes format error")
+      # print(i)
+      # ilp_nodes[,i] = newval
     }
   }
   
@@ -2221,7 +2234,7 @@ initiate_ilp_edges = function(EdgeSet_all, CplexSet, Exclude = ""){
     match_matrix_index_ls = list()
     
     for(i in 1:nrow(EdgeSet_df)){
-      # if(i%%1000==0)print(i)
+      # if(i%%1000==0) print(i)
       edge_id = EdgeSet_df$edge_id[i]
       category = EdgeSet_df$category[i]
       
