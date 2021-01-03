@@ -478,19 +478,24 @@ Expand_libraryset = function(LibrarySet){
     lib_known_id = LibrarySet %>%
       filter(origin == "known_library") %>%
       pull(library_id)
+    
     lib_known = seed_library %>%
-      filter(node_id %in% lib_known_id) %>%
-      filter(category == "Metabolite")
-    
-    rule_1 = initial_rule %>% filter(category == "Biotransform") %>% filter(direction %in% c(0,1))
-    rule_2 = initial_rule %>% filter(category == "Biotransform") %>% filter(direction %in% c(0,-1))
-    
-    lib_known_1 = expand_library(lib_known, rule_1, direction = 1, category = "Metabolite")
-    lib_known_2 = expand_library(lib_known, rule_2, direction = -1, category = "Metabolite")
-    lib_met = bind_rows(lib_known_1, lib_known_2) %>%
-      filter(!grepl("-|NA", formula)) 
-    
+        filter(node_id %in% lib_known_id) %>%
+        filter(category == "Metabolite")
+      
+    if(nrow(lib_known) > 0){
+      rule_1 = initial_rule %>% filter(category == "Biotransform") %>% filter(direction %in% c(0,1))
+      rule_2 = initial_rule %>% filter(category == "Biotransform") %>% filter(direction %in% c(0,-1))
+      
+      lib_known_1 = expand_library(lib_known, rule_1, direction = 1, category = "Metabolite")
+      lib_known_2 = expand_library(lib_known, rule_2, direction = -1, category = "Metabolite")
+      lib_met = bind_rows(lib_known_1, lib_known_2) %>%
+        filter(!grepl("-|NA", formula)) 
+    } else {
+      lib_met = lib_known
     }
+    
+  }
   
   # Expanding known adducts
   {
@@ -639,6 +644,9 @@ Check_sys_error = function(NodeSet, StructureSet, LibrarySet,
                            RT_match = T){
   known_library = LibrarySet %>%
     filter(origin %in% c("known_library","manual_library"))
+  if(nrow(known_library) == 0){
+    known_library = LibrarySet
+  }
   
   node_RT = sapply(NodeSet, "[[", "RT")
   library_RT = LibrarySet$rt
