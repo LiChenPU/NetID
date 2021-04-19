@@ -4,7 +4,7 @@
   setwd(dirname(rstudioapi::getSourceEditorContext()$path))
   source("NetID_function.R")
   
-  work_dir = "../Mouse_liver_neg/"
+  work_dir = "../Sc_neg/"
   setwd(work_dir)
   printtime = Sys.time()
   timestamp = paste(unlist(regmatches(printtime, gregexpr("[[:digit:]]+", printtime))),collapse = '')
@@ -18,7 +18,7 @@
                     ion_mode = -1 # 1 for pos mode and -1 for neg mode
                     )
   Mset = read_MS2data(Mset,
-                      MS2_folder = "MS2_neg_200524") # MS2_neg_200524
+                      MS2_folder = "MS2") # MS2_neg_200524
 }
 
 # Data cleaning ####
@@ -57,7 +57,7 @@
   measured_mz_adjust = T 
   if(measured_mz_adjust){
     Sys_msr_error = Check_sys_error(NodeSet, StructureSet, LibrarySet, 
-                                    RT_match = F)
+                                    RT_match = T)
     
     mass_adjustment = abs(Sys_msr_error$ppm_adjust + Sys_msr_error$abs_adjust/250*1e6) > 0.2
     
@@ -174,6 +174,19 @@
 {
   NetID_output =  get_NetID_output(CplexSet$ilp_nodes, simplified = T)
   write.csv(NetID_output,"NetID_output.csv", row.names = F, na="")
+  
+  # Node and edge lists for cytoscape output
+  cyto_nodes = CplexSet$ilp_nodes %>%
+    filter(ilp_solution > 0.01)
+  cyto_edges = CplexSet$ilp_edges %>%
+    filter(ilp_solution > 0.01 | 
+             (ilp_nodes1 %in% cyto_nodes$ilp_node_id &
+              ilp_nodes2 %in% cyto_nodes$ilp_node_id &
+              category == "Biotransform"))
+  
+  write_csv(cyto_nodes, "cyto_nodes.csv")
+  write_csv(cyto_edges, "cyto_edges.csv")
+  
 }
 
 save.image()
