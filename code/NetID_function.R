@@ -289,13 +289,21 @@ Peak_cleanup = function(Mset,
       medMz[k_min:(k_max-1)]=median(medMz[k_min:(k_max-1)], na.rm = T)
       medRt[k_min:(k_max-1)]=median(medRt[k_min:(k_max-1)], na.rm = T)
       temp = s3[k_min:(k_max-1),first_sample_col_num:ncol_raw]
-      temp[1,] = apply(temp, 2, function(x){
+      # temp[1,] = apply(temp, 2, function(x){
+      #   if(any(!is.na(x))){
+      #     return(max(x, na.rm = T))
+      #   } else {
+      #     return(NA)
+      #   }
+      # })
+      t_temp <- apply(temp, 2, function(x){ #!!!!!
         if(any(!is.na(x))){
           return(max(x, na.rm = T))
         } else {
           return(NA)
         }
       })
+      temp[1,] = matrix(t_temp, nrow = 1, dimnames = list(NULL, names(t_temp)))
       s3[k_min:(k_max-1), first_sample_col_num:ncol_raw] = temp[1,]
     }
     
