@@ -44,7 +44,7 @@ This section provides step-by-step instructions to set up the environment to run
 
 ## Package dependency installation
 
-Most of the dependent packages can be installed by running the R script NetID_packages.R in the `get started` folder. See **Troubleshooting** section for possible errors.
+Most of the dependent packages can be installed by running the R script `NetID_packages.R` in the `get started` folder. See **Troubleshooting** section for possible errors.
 
 The package, **cplexAPI**, connecting R to CPLEX, requires additional installation steps.
 
@@ -59,7 +59,7 @@ The package, **cplexAPI**, connecting R to CPLEX, requires additional installati
 
 3. In command line, run line below to build package, change `${Username}` to actual name.  
 `R CMD build --no-build-vignettes --no-manual --md5 "C:\Users\${Username}\Desktop\cplexAPI"`  
-a new package cplexAPI_1.4.0.tar.gz will be built under the default path (for example, `C:\Users\${Username}`)
+a new package `cplexAPI_1.4.0.tar.gz` will be built under the default path (for example, `C:\Users\${Username}`)
 
 4. In command line, run line below to install package.  
 `R CMD INSTALL --build --no-multiarch .\cplexAPI_1.4.0.tar.gz`  
@@ -134,7 +134,7 @@ set `ion_mode` as `-1` if negative ionization data is loaded, and `1` if positiv
 
 ### MS1 dataset preparation
 
-1.  File conversion. Use software ProteoWizard40 (version 3.0.11392) to convert LC-MS raw data files (.raw) into mzXML format. A command line script specifies the conversion parameter. Assuming the raw data are in D:/MS data/test. Type in the scripts below.
+1.  File conversion. Use software **ProteoWizard40** (version 3.0.11392) to convert LC-MS raw data files (.raw) into mzXML format. A command line script specifies the conversion parameter. Assuming the raw data are in `D:/MS data/test`. Type in the scripts below.
     ```
 D:
 cd D:/MS data/test
@@ -151,10 +151,10 @@ After peak picking and a peak table tab has shown up, click `export to CSV`. Cho
 
 ### MS2 dataset preparation
 
-NetID currently utilizes targeted MS2 data for better MS2 quality, and will incorporate data-dependent MS2 data in the future.
+**NetID** currently utilizes targeted MS2 data for better MS2 quality, and will incorporate data-dependent MS2 data in the future.
 
 1. Prepare MS2 inclusion list  
-For targeted MS2 analysis, from the peak list generated in step 1, select the peaks (m/z, RT) that you want to perform MS2, and arrange them into multiple csv files that will serve as the inclusion lists to set up the PRM method on Thermo QExactive instrument. Instruction can be found in <https://proteomicsresource.washington.edu/docs/protocols05/PRM_QExactive.pdf>.  
+For targeted MS2 analysis, from the peak list generated in *step 1*, select the peaks (m/z, RT) that you want to perform MS2, and arrange them into multiple csv files that will serve as the inclusion lists to set up the PRM method on **Thermo QExactive** instrument. Instruction can be found in <https://proteomicsresource.washington.edu/docs/protocols05/PRM_QExactive.pdf>.  
 *Note*: Arrange the parent ions so as to avoid to perform many PRMs at same time. An example is shown below with the start and End time set as RT-1.5 and RT+1.5 (min) to have good chromatogram coverage.  
 ```{r}
 library(readr)
@@ -162,7 +162,7 @@ read_csv("example.csv")
 ```
 
 2. Instrument setup  
-Set up the QExactive instrument so that it contains both “Full MS” and “PRM” scan events. For PRM setup, use the above file as inclusion list to perform targeted MS2 analysis. We typically use the following setting for MS2 analysis: resolution 17500, AGC target 1e6, Maximum IT 500 ms, isolation window 1.5 m/z. For a total of 1500 parent ions and 15 parent ions for each method, it requires a total of 100 runs, or ~42 hours using a 25-min LC method.
+Set up the **QExactive** instrument so that it contains both “Full MS” and “PRM” scan events. For PRM setup, use the above file as inclusion list to perform targeted MS2 analysis. We typically use the following setting for MS2 analysis: resolution 17500, AGC target 1e6, Maximum IT 500 ms, isolation window 1.5 m/z. For a total of 1500 parent ions and 15 parent ions for each method, it requires a total of 100 runs, or ~42 hours using a 25-min LC method.
 
 3.  MS2 file conversion.  
 **RawConverte**r (version 1.2.0.1, <http://fields.scripps.edu/rawconv/>) is used to convert the `.raw` file into `.mzXML` file that contains MS2 information. Keep the default parameters except setting `Environment Type` as `Data Independent`, and `Output Formats` as `mzXML`.
@@ -202,6 +202,9 @@ This section provides instruction to visualize and explore **NetID** output resu
 
 ## Cytoscape
 
+0. What is **Cytoscape**
+For more info regarding what is **Cytoscape**, check <https://cytoscape.org/what_is_cytoscape.html>.
+
 1. install **Cytoscape**
 Download **Cytoscape** (<https://cytoscape.org/download.html>) and follow installation instruction to install onto your computer.
 
@@ -210,7 +213,8 @@ Download **Cytoscape** (<https://cytoscape.org/download.html>) and follow instal
     * Click `import table from file`, load `cyto_node.csv`, set `node_id` column as the `key`, and the rest columns as `node attribute`. 
     * Select `subnetwork`, set `styles`, and explore the network with various functionalities inside **Cytoscape**.
     
-3. Explore in Cytoscape
+3. Explore in Cytoscape  
+<http://manual.cytoscape.org/en/stable/index.html> provides all you need to know about exploring in **Cytoscape**. (This writer knew little about this cool software, so all he could give was this link and *may the Force be with you*.)
 
 4. Export  
 The network as well as the curated subnetworks can be exported for future analysis or sharing with others. An example network file `example.cys` is included along with the two `.csv` files, which is created using **Cytoscape** version 3.8.2
