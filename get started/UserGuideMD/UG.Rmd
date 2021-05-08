@@ -196,6 +196,48 @@ set `ion_mode` as `-1` if negative ionization data is loaded, and `1` if positiv
 
 Similar to the `demo` file, the console will print out message indicating optimization step is successful, and three files `NetID_output.csv`, `NetID_output.RData` and `.RData` will be generated in the `NetID_test` folder
 
+## Advanced Setting
+
+### Using other librarys
+
+#### Using provided librarys
+
+**NetID** provides 4 librarys for the user to choose: **HMDB**, **YMDB**, **PubChem**, **PubChem Bio-pathway only**.
+
+To select the desired database, change `HMDB_library_file = "../dependent/hmdb_library.csv"` to `../dependent/ymdb_library.csv`, `../dependent/pbcm_library.csv` or `../dependent/pbcm_library_bio.csv`.
+```
+  Mset = read_files(filename = "raw_data.csv",
+                    LC_method = "Hilic_25min_QE", # "Hilic_Rutgers_QEPlus" "Hilic_25min_QE", lipids is empty
+                    ion_mode = -1, # 1 for pos mode and -1 for neg mode
+                    HMDB_library_file = "../dependent/hmdb_library.csv"
+                    )
+```
+
+#### Design your own library
+
+1. A workable library requires following columns.
+```{r}
+read_csv("../../dependent/hmdb_library.csv")
+```
+
+2. To build your own library, make a csv file in the same format as the one shown above, and set `HMDB_library_file = "../dependent/hmdb_library.csv"` to your desired directory in `NetID_run_script.R`.
+
+### Modifying `emperical_rules.csv`
+
+`emperical_rules.csv` can also be created or modifed to support specific biotransformation. A workable emperical_rules requires following columns.
+    * `name` and `note` is not necessary.
+    * `category` includes: `Biotransform`, `Natural_abundance`, `Adduct`, `Fragment` and `Radical`
+    * `rbde` is calculated using the `formula_rbde` function of the package `lc8`
+    * `direction` states the possible direction of transformation: `1` means from larger mass to smaller mass; `0` means the opposite; `-1` means both direction are possible.
+    
+```{r}
+read_csv("../../dependent/empirical_rules.csv")
+```
+
+### Score Setting
+
+To be updated.
+
 # NetID Visualization
 
 This section provides instruction to visualize and explore **NetID** output results in either **Cytoscape** software or interactive **Shiny R app**. After running **NetID** algorithm, it will export one `.R` and two `.csv `files (`cyto_node.csv` and `cyto_edges.csv`), storing the nodes and edges of the output network.

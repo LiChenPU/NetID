@@ -266,7 +266,7 @@ function toggle_visibility(id1) {
 
 <h1 class="title toc-ignore">NetID User Guide</h1>
 <p class="author-name">Li Chen, Ziyang Chen</p>
-<h4 class="date">22 四月 2021</h4>
+<h4 class="date">6 五月 2021</h4>
 
 </div>
 
@@ -306,7 +306,7 @@ function toggle_visibility(id1) {
 </div>
 <div id="package-dependency-installation" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Package dependency installation</h2>
-<p>Most of the dependent packages can be installed by running the R script NetID_packages.R in the <code>get started</code> folder. See <strong>Troubleshooting</strong> section for possible errors.</p>
+<p>Most of the dependent packages can be installed by running the R script <code>NetID_packages.R</code> in the <code>get started</code> folder. See <strong>Troubleshooting</strong> section for possible errors.</p>
 <p>The package, <strong>cplexAPI</strong>, connecting R to CPLEX, requires additional installation steps.</p>
 <ol style="list-style-type: decimal">
 <li><p>Go to website: <a href="https://cran.r-project.org/web/packages/cplexAPI/index.html" class="uri">https://cran.r-project.org/web/packages/cplexAPI/index.html</a>, look for <code>Package source</code>, and download <code>cplexAPI_1.4.0.tar.gz</code>. In the same page, look for <code>Materials</code>, and open the <code>INSTALL link</code></p></li>
@@ -321,7 +321,7 @@ function toggle_visibility(id1) {
 </ul></li>
 <li><p>In command line, run line below to build package, change <code>${Username}</code> to actual name.<br />
 <code>R CMD build --no-build-vignettes --no-manual --md5 &quot;C:\Users\${Username}\Desktop\cplexAPI&quot;</code><br />
-a new package cplexAPI_1.4.0.tar.gz will be built under the default path (for example, <code>C:\Users\${Username}</code>)</p></li>
+a new package <code>cplexAPI_1.4.0.tar.gz</code> will be built under the default path (for example, <code>C:\Users\${Username}</code>)</p></li>
 <li><p>In command line, run line below to install package.<br />
 <code>R CMD INSTALL --build --no-multiarch .\cplexAPI_1.4.0.tar.gz</code><br />
 If you see <code>DONE (cplexAPI)</code>, then the package installation is successful.</p>
@@ -401,7 +401,7 @@ set <code>ion_mode</code> as <code>-1</code> if negative ionization data is load
 <div id="ms1-dataset-preparation" class="section level3" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> MS1 dataset preparation</h3>
 <ol style="list-style-type: decimal">
-<li><p>File conversion. Use software ProteoWizard40 (version 3.0.11392) to convert LC-MS raw data files (.raw) into mzXML format. A command line script specifies the conversion parameter. Assuming the raw data are in D:/MS data/test. Type in the scripts below.</p>
+<li><p>File conversion. Use software <strong>ProteoWizard40</strong> (version 3.0.11392) to convert LC-MS raw data files (.raw) into mzXML format. A command line script specifies the conversion parameter. Assuming the raw data are in <code>D:/MS data/test</code>. Type in the scripts below.</p>
 <pre><code>D:
 cd D:/MS data/test
 &quot;C:\Program Files\ProteoWizard\ProteoWizard 3.0.11392\msconvert.exe&quot; *.raw --filter &quot;peakPicking true 1-&quot; --simAsSpectra --srmAsSpectra --mzXML </code></pre>
@@ -414,10 +414,10 @@ After peak picking and a peak table tab has shown up, click <code>export to CSV<
 </div>
 <div id="ms2-dataset-preparation" class="section level3" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> MS2 dataset preparation</h3>
-<p>NetID currently utilizes targeted MS2 data for better MS2 quality, and will incorporate data-dependent MS2 data in the future.</p>
+<p><strong>NetID</strong> currently utilizes targeted MS2 data for better MS2 quality, and will incorporate data-dependent MS2 data in the future.</p>
 <ol style="list-style-type: decimal">
 <li>Prepare MS2 inclusion list<br />
-For targeted MS2 analysis, from the peak list generated in step 1, select the peaks (m/z, RT) that you want to perform MS2, and arrange them into multiple csv files that will serve as the inclusion lists to set up the PRM method on Thermo QExactive instrument. Instruction can be found in <a href="https://proteomicsresource.washington.edu/docs/protocols05/PRM_QExactive.pdf" class="uri">https://proteomicsresource.washington.edu/docs/protocols05/PRM_QExactive.pdf</a>.<br />
+For targeted MS2 analysis, from the peak list generated in <em>step 1</em>, select the peaks (m/z, RT) that you want to perform MS2, and arrange them into multiple csv files that will serve as the inclusion lists to set up the PRM method on <strong>Thermo QExactive</strong> instrument. Instruction can be found in <a href="https://proteomicsresource.washington.edu/docs/protocols05/PRM_QExactive.pdf" class="uri">https://proteomicsresource.washington.edu/docs/protocols05/PRM_QExactive.pdf</a>.<br />
 <em>Note</em>: Arrange the parent ions so as to avoid to perform many PRMs at same time. An example is shown below with the start and End time set as RT-1.5 and RT+1.5 (min) to have good chromatogram coverage.</li>
 </ol>
 <pre class="r"><code>library(readr)
@@ -460,7 +460,7 @@ read_csv(&quot;example.csv&quot;)</code></pre>
 ## # ... with 2 more variables: MSXID &lt;lgl&gt;, Comment &lt;chr&gt;</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Instrument setup<br />
-Set up the QExactive instrument so that it contains both “Full MS” and “PRM” scan events. For PRM setup, use the above file as inclusion list to perform targeted MS2 analysis. We typically use the following setting for MS2 analysis: resolution 17500, AGC target 1e6, Maximum IT 500 ms, isolation window 1.5 m/z. For a total of 1500 parent ions and 15 parent ions for each method, it requires a total of 100 runs, or ~42 hours using a 25-min LC method.</p></li>
+Set up the <strong>QExactive</strong> instrument so that it contains both “Full MS” and “PRM” scan events. For PRM setup, use the above file as inclusion list to perform targeted MS2 analysis. We typically use the following setting for MS2 analysis: resolution 17500, AGC target 1e6, Maximum IT 500 ms, isolation window 1.5 m/z. For a total of 1500 parent ions and 15 parent ions for each method, it requires a total of 100 runs, or ~42 hours using a 25-min LC method.</p></li>
 <li><p>MS2 file conversion.<br />
 <strong>RawConverte</strong>r (version 1.2.0.1, <a href="http://fields.scripps.edu/rawconv/" class="uri">http://fields.scripps.edu/rawconv/</a>) is used to convert the <code>.raw</code> file into <code>.mzXML</code> file that contains MS2 information. Keep the default parameters except setting <code>Environment Type</code> as <code>Data Independent</code>, and <code>Output Formats</code> as <code>mzXML</code>.</p></li>
 <li><p>MS2 reading and cleaning.<br />
@@ -499,13 +499,101 @@ set <code>ion_mode</code> as <code>-1</code> if negative ionization data is load
 <p>Similar to the <code>demo</code> file, the console will print out message indicating optimization step is successful, and three files <code>NetID_output.csv</code>, <code>NetID_output.RData</code> and <code>.RData</code> will be generated in the <code>NetID_test</code> folder</p>
 </div>
 </div>
+<div id="advanced-setting" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Advanced Setting</h2>
+<div id="using-other-librarys" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Using other librarys</h3>
+<div id="using-provided-librarys" class="section level4" number="2.3.1.1">
+<h4><span class="header-section-number">2.3.1.1</span> Using provided librarys</h4>
+<p><strong>NetID</strong> provides 3 librarys for the user to choose: <strong>HMDB</strong>, <strong>YMDB</strong>, <strong>PubChem</strong>.</p>
+<p>To select the desired database, change <code>HMDB_library_file = &quot;../dependent/hmdb_library.csv&quot;</code> to <code>../dependent/ymdb_library.csv</code>or <code>../dependent/pbcm_library.csv</code>.</p>
+<pre><code>  Mset = read_files(filename = &quot;raw_data.csv&quot;,
+                    LC_method = &quot;Hilic_25min_QE&quot;, # &quot;Hilic_Rutgers_QEPlus&quot; &quot;Hilic_25min_QE&quot;, lipids is empty
+                    ion_mode = -1, # 1 for pos mode and -1 for neg mode
+                    HMDB_library_file = &quot;../dependent/hmdb_library.csv&quot;
+                    )</code></pre>
+</div>
+<div id="design-your-own-library" class="section level4" number="2.3.1.2">
+<h4><span class="header-section-number">2.3.1.2</span> Design your own library</h4>
+<ol style="list-style-type: decimal">
+<li>A workable library requires following columns.</li>
+</ol>
+<pre class="r"><code>read_csv(&quot;../../dependent/hmdb_library.csv&quot;)</code></pre>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   accession = col_character(),
+##   iupac_name = col_character(),
+##   name = col_character(),
+##   SMILES = col_character(),
+##   status = col_character(),
+##   formula = col_character(),
+##   mass = col_double(),
+##   rdbe = col_double(),
+##   category = col_character()
+## )</code></pre>
+<pre><code>## # A tibble: 114,014 x 9
+##    accession  iupac_name     name  SMILES    status formula  mass  rdbe category
+##    &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   
+##  1 HMDB00000~ (2S)-2-amino-~ 1-Me~ CN1C=NC(~ quant~ C7H11N~ 169.      4 Metabol~
+##  2 HMDB00000~ propane-1,3-d~ 1,3-~ NCCCN     quant~ C3H10N2  74.1     0 Metabol~
+##  3 HMDB00000~ 2-oxobutanoic~ 2-Ke~ CCC(=O)C~ quant~ C4H6O3  102.      2 Metabol~
+##  4 HMDB00000~ 2-hydroxybuta~ 2-Hy~ CCC(O)C(~ quant~ C4H8O3  104.      1 Metabol~
+##  5 HMDB00000~ (1S,10R,11S,1~ 2-Me~ [H][C@@]~ quant~ C19H24~ 300.      8 Metabol~
+##  6 HMDB00000~ (3R)-3-hydrox~ (R)-~ C[C@@H](~ quant~ C4H8O3  104.      1 Metabol~
+##  7 HMDB00000~ 1-[(2R,4S,5R)~ Deox~ OC[C@H]1~ quant~ C9H12N~ 228.      5 Metabol~
+##  8 HMDB00000~ 4-amino-1-[(2~ Deox~ NC1=NC(=~ quant~ C9H13N~ 227.      5 Metabol~
+##  9 HMDB00000~ (1S,2R,10R,11~ Cort~ [H][C@@]~ quant~ C21H30~ 346.      7 Metabol~
+## 10 HMDB00000~ (1S,2R,10S,11~ Deox~ [H][C@@]~ quant~ C21H30~ 330.      7 Metabol~
+## # ... with 114,004 more rows</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><p>To build your own library, make a csv file in the same format as the one shown above, and set <code>HMDB_library_file = &quot;../dependent/hmdb_library.csv&quot;</code> to your desired directory in <code>NetID_run_script.R</code>.</p></li>
+<li><p><code>emperical_rules.csv</code> can also be created or modifed to support specific biotransformation. A workable emperical_rules requires following columns.</p>
+<ul>
+<li><code>name</code> and <code>note</code> is not necessary.</li>
+<li><code>category</code> includes: <code>Biotransform</code>, <code>Natural_abundance</code>, <code>Adduct</code>, <code>Fragment</code> and <code>Radical</code></li>
+<li><code>rbde</code> is calculated using the <code>formula_rbde</code> function of the package <code>lc8</code></li>
+<li><code>direction</code> states the possible direction of transformation: <code>1</code> means from larger mass to smaller mass; <code>0</code> means the opposite; <code>-1</code> means both direction are possible.</li>
+</ul></li>
+</ol>
+<pre class="r"><code>read_csv(&quot;../../dependent/empirical_rules.csv&quot;)</code></pre>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   category = col_character(),
+##   name = col_character(),
+##   formula = col_character(),
+##   mass = col_double(),
+##   direction = col_double(),
+##   rdbe = col_double(),
+##   note = col_character()
+## )</code></pre>
+<pre><code>## # A tibble: 84 x 7
+##    category     name  formula    mass direction  rdbe note             
+##    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            
+##  1 Biotransform O-HN  O1N-1H-1  0.984         0     0 Deamination      
+##  2 Biotransform NH3-O N1H3O-1   1.03          0    -1 Transamination   
+##  3 Biotransform H2    H2        2.02          0    -1 Hydrogenation    
+##  4 Biotransform CH2   C1H2     14.0           0     0 Methylation      
+##  5 Biotransform NH    N1H1     15.0           0     0 Amination        
+##  6 Biotransform O     O1       16.0           0     0 Hydroxylation    
+##  7 Biotransform N1H3  N1H3     17.0           0    -1 Amination (+NH3) 
+##  8 Biotransform H2O   H2O1     18.0           0    -1 Hydration        
+##  9 Biotransform CO    C1O1     28.0           0     1 Formylation (+CO)
+## 10 Biotransform C2H4  C2H4     28.0           0     0 Beta oxidation   
+## # ... with 74 more rows</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div id="netid-visualization" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> NetID Visualization</h1>
 <p>This section provides instruction to visualize and explore <strong>NetID</strong> output results in either <strong>Cytoscape</strong> software or interactive <strong>Shiny R app</strong>. After running <strong>NetID</strong> algorithm, it will export one <code>.R</code> and two <code>.csv</code>files (<code>cyto_node.csv</code> and <code>cyto_edges.csv</code>), storing the nodes and edges of the output network.</p>
 <div id="cytoscape" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Cytoscape</h2>
-<ol style="list-style-type: decimal">
+<ol start="0" style="list-style-type: decimal">
+<li><p>What is <strong>Cytoscape</strong>
+For more info regarding what is <strong>Cytoscape</strong>, check <a href="https://cytoscape.org/what_is_cytoscape.html" class="uri">https://cytoscape.org/what_is_cytoscape.html</a>.</p></li>
 <li><p>install <strong>Cytoscape</strong>
 Download <strong>Cytoscape</strong> (<a href="https://cytoscape.org/download.html" class="uri">https://cytoscape.org/download.html</a>) and follow installation instruction to install onto your computer.</p></li>
 <li><p>Load the example <strong>NetID</strong> output into <strong>Cytoscape</strong></p>
@@ -515,7 +603,8 @@ Download <strong>Cytoscape</strong> (<a href="https://cytoscape.org/download.htm
 <li>Click <code>import table from file</code>, load <code>cyto_node.csv</code>, set <code>node_id</code> column as the <code>key</code>, and the rest columns as <code>node attribute</code>.</li>
 <li>Select <code>subnetwork</code>, set <code>styles</code>, and explore the network with various functionalities inside <strong>Cytoscape</strong>.</li>
 </ul></li>
-<li><p>Explore in Cytoscape</p></li>
+<li><p>Explore in Cytoscape<br />
+<a href="http://manual.cytoscape.org/en/stable/index.html" class="uri">http://manual.cytoscape.org/en/stable/index.html</a> provides all you need to know about exploring in <strong>Cytoscape</strong>. (This writer knew little about this cool software, so all he could give was this link and <em>may the Force be with you</em>.)</p></li>
 <li><p>Export<br />
 The network as well as the curated subnetworks can be exported for future analysis or sharing with others. An example network file <code>example.cys</code> is included along with the two <code>.csv</code> files, which is created using <strong>Cytoscape</strong> version 3.8.2</p></li>
 </ol>

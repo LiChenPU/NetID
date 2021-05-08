@@ -15,7 +15,8 @@
   # Read in files 
   Mset = read_files(filename = "raw_data.csv",
                     LC_method = "Hilic_25min_QE", # "Hilic_Rutgers_QEPlus" "Hilic_25min_QE", lipids is empty
-                    ion_mode = -1 # 1 for pos mode and -1 for neg mode
+                    ion_mode = -1, # 1 for pos mode and -1 for neg mode
+                    HMDB_library_file = "../dependent/hmdb_library.csv"
                     )
   Mset = read_MS2data(Mset,
                       MS2_folder = "MS2") # MS2_neg_200524
