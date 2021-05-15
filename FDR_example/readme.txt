@@ -1,0 +1,1 @@
+open and source 'main.R'
