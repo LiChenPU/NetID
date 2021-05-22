@@ -1,0 +1,2 @@
+[1] "Optimization ended successfull - integer optimal, tolerance  - OBJ_value = 2956.21 (bestobjective - bestinteger) / (1e-10 + |bestinteger|) = 0.00004202"
+106.42 sec elapsed
