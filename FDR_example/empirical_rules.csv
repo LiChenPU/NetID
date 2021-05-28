@@ -1,0 +1,85 @@
+category,name,formula,mass,direction,rdbe,note
+Biotransform,O-HN,O1N-1H-1,0.984015578,0,0,Deamination
+Biotransform,NH3-O,N1H3O-1,1.031634486,0,-1,Transamination
+Biotransform,H2,H2,2.015650064,0,-1,Hydrogenation
+Biotransform,CH2,C1H2,14.01565006,0,0,Methylation
+Biotransform,NH,N1H1,15.01089904,0,0,Amination
+Biotransform,O,O1,15.99491462,0,0,Hydroxylation
+Biotransform,N1H3,N1H3,17.02654911,0,-1,Amination (+NH3)
+Biotransform,H2O,H2O1,18.01056468,0,-1,Hydration
+Biotransform,CO,C1O1,27.99491462,0,1,Formylation (+CO)
+Biotransform,C2H4,C2H4,28.03130013,0,0,Beta oxidation
+Biotransform,CH2O,C1H2O1,30.01056468,0,0,Deamination
+Biotransform,S1,S1,31.97207073,0,0,Thiolation (S)
+Biotransform,H2S,H2S1,33.98772079,0,-1,Sulfurization (H2S)
+Biotransform,C2H2O,C2H2O1,42.01056468,0,1,Acetylation
+Biotransform,CO2,C1O2,43.98982924,0,1,Carboxylation (+CO2)
+Biotransform,C5H8,C5H8,68.06260026,1,1,Isoprenylation
+Biotransform,SO3,S1O3,79.95681459,0,0,Sulfurylatoin
+Biotransform,HPO3,H1P1O3,79.96633038,0,0,Phosphorylation
+Biotransform,C6H10O5,C6H10O5,162.0528234,1,1,Hexose
+Biotransform,C6H8O6,C6H8O6,176.032088,1,2,Uronate
+Biotransform,C16H30O,C16H30O1,238.2296656,1,1,Palmitoylation
+Biotransform,C11H17NO8,C11H17N1O8,291.0954165,1,3,sialic acid
+Biotransform,C10H12N5O6P1,C10H12N5O6P1,329.0525196,1,7,AMP
+Biotransform,C9H13N3O10P2,C9H13N3O10P2,385.0076166,1,5,CDP
+Biotransform,C15H21N5O13P2,C15H21N5O13P2,541.0611088,1,8,ADP-ribosylation
+Natural_abundance,[10]B,[10]B-1B1,0.9963684,-1,0,
+Natural_abundance,[15]N,[15]N1N-1,0.99703496,1,0,
+Natural_abundance,[30]Si-[29]Si,[29]Si-1[30]Si1,0.9972755,1,0,
+Natural_abundance,[29]Si,[29]Si1Si-1,0.99956819,1,0,
+Natural_abundance,[53]Cr,[53]Cr1Cr-1,1.0001419,1,0,
+Natural_abundance,[13]C,[13]C1C-1,1.00335484,1,0,
+Natural_abundance,[2]H,[2]H1H-1,1.006276746,1,0,
+Natural_abundance,[34]S,[34]S1S-1,1.99579614,1,0,
+Natural_abundance,[30]Si,[30]Si1Si-1,1.99684369,1,0,
+Natural_abundance,[37]Cl,[37]Cl1Cl-1,1.99704989,1,0,
+Natural_abundance,[41]K,[41]K1K-1,1.99811907,1,0,
+Natural_abundance,[18]O,[18]O1O-1,2.00424578,1,0,
+Natural_abundance,[44]Ca,[44]Ca1Ca-1,3.9928899,1,0,
+Natural_abundance,[60]Ni,[60]Ni1Ni-1,1.9954435,1,0,
+Natural_abundance,[62]Ni,[62]Ni1Ni-1,3.9930022,1,0,
+Adduct,Na-H,H-1Na1,21.98194463,1,0,
+Adduct,HCl,Cl1H1,35.97667774,1,0,
+Adduct,K-H,H-1K1,37.95588187,1,0,
+Adduct,Ni-2H,H-2Ni1,55.91969284,1,0,
+Adduct,Ca-2H,Ca1H-2,37.94694,1,0,
+Adduct,HCOOH,C1H2O2,46.0054793,1,0,
+Adduct,HCOONa,C1H1Na1O2,67.98742393,1,0,
+Adduct,HCOOK,C1H1K1O2,83.96136117,1,0,
+Adduct,C2H4O2,C2H4O2,60.02112937,1,0,
+Adduct,CH3COONa,C2H3Na1O2,82.003074,1,0,
+Adduct,CH3COOK,C2H3K1O2,97.97701124,1,0,
+Adduct,CH2COONi,C2H2Ni1O2,115.9408222,1,0,
+Adduct,CH2COOCa,C2Ca1H2O2,97.96807,1,0,
+Adduct,H2SO4,H2O4S1,97.96737927,1,0,
+Adduct,NaHSO4,H1Na1O4S1,119.9493239,1,0,
+Adduct,KHSO4,H1K1O4S1,135.9232611,1,0,
+Adduct,HNO3,H1N1O3,62.9956429,1,0,
+Adduct,NaNO3,N1Na1O3,84.97758753,1,0,
+Adduct,H2CO3,H2C1O3,62.00039,1,0,
+Adduct,NaHCO3,Na1H1C1O3,83.98234,1,0,
+Adduct,KHCO3,K1H1C1O3,99.95628,1,0,
+Adduct,H3PO4,H3O4P1,97.97689507,1,0,
+Adduct,NaH2PO4,H2Na1O4P1,119.9588397,1,0,
+Adduct,KH2PO4,H2K1O4P1,135.9327769,1,0,
+Adduct,CrO3,Cr1O3,99.92525136,1,0,
+Adduct,H4SiO4,H4O4Si1,95.9878851,1,0,
+Adduct,NH3,H3N1,17.02654911,1,0,
+Adduct,2Na-2H,H-2Na2,43.96388926,1,0,
+Adduct,2K-2H,H-2K2,75.91176374,1,0,
+Adduct,HCN,C1H1N1,27.01089904,1,0,
+Adduct,CH3OH,C1H4O1,32.02621475,1,0,
+Adduct,H3PO4 dimer,H6O8P2,195.9537901,1,0,
+Adduct,H3BO3-3H2O,B1H-3,7.985830404,1,2,
+Adduct,H3BO3-2H2O,B1H-1O1,25.99639509,1,1,
+Adduct,H2SiO3,H2O3Si1,77.97732041,1,0,
+Adduct,NaOH,H1Na1O1,39.99250931,1,0,
+Adduct,KOH,H1K1O1,55.96644655,1,0,
+Adduct,CH3CN,C2H3N1,41.02654911,1,0,
+Adduct,C3H8SiO3,C3H8O3Si1,120.0242706,1,0,
+Fragment,CO2,C1O2,43.98982924,-1,1,
+Fragment,CH2O,C1H2O1,30.01056468,-1,0,
+Fragment,H2O,H2O1,18.01056468,-1,-1,
+Fragment,NH3,N1H3,17.02654911,-1,-1,
+Radical,H,H,1.007825,-1,-0.5,
