@@ -62,7 +62,7 @@ load("FDR.RData")
       )) +
       labs(x = NULL,
            # title = "U13C-glucose",
-           y = "Annotation precision") +
+           y = "Fraction correct") +
       scale_y_continuous(limits = c(0.7, 1.05),
                          expand = c(0,0),
                          breaks = c(.6,.7,.8,.9, 1)
@@ -86,7 +86,7 @@ load("FDR.RData")
       )) +
       labs(x = NULL,
            # title = "U13C-glucose",
-           y = "Annotation precision") +
+           y = "Fraction correct") +
       scale_y_continuous(limits = c(0.7, 1.05),
                          expand = c(0,0),
                          breaks = c(.6,.7,.8,.9, 1)

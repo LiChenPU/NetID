@@ -13,6 +13,7 @@ setwd(WORK_DIR)
   ## Run NetID first and copy the environment .RData to the datapath first ##
   filename = ".RData" 
   load(filename)
+  datapath = Sc_neg_ymdb
   
   # Global parameter in the background ####
   {
@@ -113,6 +114,11 @@ setwd(WORK_DIR)
     addDataFrame(table(table(formulaset_initial$node_id)),
                  sheet, startRow=18, startColumn=1)
     
+    addDataFrame(data.frame(total = nrow(ilp_edges_filter),
+                            biochemical = nrow(ilp_edges_filter %>% filter(category == "Biotransform")),
+                            abiotic = nrow(ilp_edges_filter %>% filter(category != "Biotransform"))
+                            ),
+                 sheet, startRow=7, startColumn=6)
     
     saveWorkbook(wb, "summary.xlsx")
   }
