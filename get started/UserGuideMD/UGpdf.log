@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.3.3)  22 APR 2021 16:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.3.3)  31 MAY 2021 10:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -744,13 +744,13 @@ LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <14.4> not available
 (Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 138.
 
 (./UGpdf.toc
-LaTeX Font Info:    Trying to load font information for T1+fvm on input line 24
+LaTeX Font Info:    Trying to load font information for T1+fvm on input line 30
 .
 (d:/texlive/2020/texmf-dist/tex/latex/bera/t1fvm.fd
 File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 7.98004pt on input line 24.
+(Font)              scaled to size 7.98004pt on input line 30.
 )
 \tf@toc=\write5
 \openout5 = `UGpdf.toc'.
@@ -904,8 +904,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 452--454
 
  []
 
+
+Overfull \hbox (15.86342pt too wide) in paragraph at lines 495--496
+[]\T1/lmss/m/n/10 (-20) To se-lect the de-sired database, change [][]\T1/fvm/m/
+n/10 HMDB_library_file[] [][][]=[] [][][]"../de[][]pen[][]dent/hmdb_library.csv
+"[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 495--496
+\T1/lmss/m/n/10 (+20) to [][]\T1/fvm/m/n/10 ../de[][]pen[][]dent/ymdb_library.c
+sv[]\T1/lmss/m/n/10 (+20) , [][]\T1/fvm/m/n/10 ../de[][]pen[][]dent/pbcm_librar
+y.csv[] \T1/lmss/m/n/10 (+20) or [][]\T1/fvm/m/n/10 ../de[][]pen[]
+ []
+
 [7]
-Overfull \hbox (12.78699pt too wide) in paragraph at lines 503--505
+Overfull \hbox (140.71823pt too wide) in paragraph at lines 503--503
+[]                    \T1/fvm/m/n/10 LC_method = "Hilic_25min_QE", # "Hilic_Rut
+gers_QEPlus" "Hilic_25min_QE", lipids is empty[] 
+ []
+
+LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
+(Font)              scaled to size 9.57605pt on input line 557.
+[8]
+Overfull \hbox (12.78699pt too wide) in paragraph at lines 620--622
 []\T1/lmss/m/n/10 (-20) Run \T1/lmss/bx/n/10 Cy-toscape\T1/lmss/m/n/10 (-20) , 
 click [][]\T1/fvm/m/n/10 im[][]port[] [][][]net[][]work[] [][][]from[] [][][]fi
 le[] [][][]sys[][]tem[]\T1/lmss/m/n/10 (-20) , and load [][]\T1/fvm/m/n/10 cyto
@@ -913,59 +935,59 @@ _edges.csv[]\T1/lmss/m/n/10 (-20) ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 503--505
+Underfull \hbox (badness 10000) in paragraph at lines 620--622
 
  []
 
-<f1.png, id=206, 498.663pt x 87.7095pt>
+[9]
+<f1.png, id=234, 498.663pt x 87.7095pt>
 File: f1.png Graphic file (type png)
 <use f1.png>
-Package pdftex.def Info: f1.png  used on input line 549.
+Package pdftex.def Info: f1.png  used on input line 666.
 (pdftex.def)             Requested size: 384.11626pt x 67.56194pt.
-[8 <./f1.png>]
-<f2.png, id=230, 354.123pt x 85.0815pt>
+[10 <./f1.png>]
+<f2.png, id=259, 354.123pt x 85.0815pt>
 File: f2.png Graphic file (type png)
 <use f2.png>
-Package pdftex.def Info: f2.png  used on input line 566.
+Package pdftex.def Info: f2.png  used on input line 683.
 (pdftex.def)             Requested size: 354.13292pt x 85.08388pt.
-<f3.png, id=231, 668.4975pt x 634.62094pt>
+<f3.png, id=260, 668.4975pt x 634.62094pt>
 File: f3.png Graphic file (type png)
 <use f3.png>
-Package pdftex.def Info: f3.png  used on input line 576.
+Package pdftex.def Info: f3.png  used on input line 693.
 (pdftex.def)             Requested size: 384.11786pt x 364.65244pt.
-[9 <./f2.png>]
-<f4.png, id=242, 384.4764pt x 317.5062pt>
+[11 <./f2.png> <./f3.png>]
+<f4.png, id=270, 384.4764pt x 317.5062pt>
 File: f4.png Graphic file (type png)
 <use f4.png>
-Package pdftex.def Info: f4.png  used on input line 601.
+Package pdftex.def Info: f4.png  used on input line 718.
 (pdftex.def)             Requested size: 384.11757pt x 317.20987pt.
-[10 <./f3.png>]
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 11.49124pt on input line 607.
-[11 <./f4.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 640--645
+(Font)              scaled to size 11.49124pt on input line 724.
+[12 <./f4.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 757--762
 [][]\T1/fvm/m/n/10 write[][]Lines(\TS1/fvm/m/n/10 '\T1/fvm/m/n/10 PATH="${RTOOL
 S40_HOME}\\usr\\bin;${PATH}"\TS1/fvm/m/n/10 '\T1/fvm/m/n/10 ,[] [][][]con[] [][
 ][]=[] [][][]"~/.Ren[][]v[][]i[]
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 648.
-[12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 648.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 765.
+[13]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 765.
 (./UGpdf.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 648.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 648.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 765.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 765.
 Package rerunfilecheck Info: File `UGpdf.out' has not changed.
-(rerunfilecheck)             Checksum: CC864180E34AE5B00C0C44E99FBB1FFA;1034.
+(rerunfilecheck)             Checksum: DD0BAF3CABE150A211BABDCE85862C46;1103.
  ) 
 Here is how much of TeX's memory you used:
- 13901 strings out of 480608
- 214169 string characters out of 5907537
- 533072 words of memory out of 5000000
- 29244 multiletter control sequences out of 15000+600000
- 606734 words of font info for 115 fonts, out of 8000000 for 9000
+ 13931 strings out of 480608
+ 214686 string characters out of 5907537
+ 535299 words of memory out of 5000000
+ 29256 multiletter control sequences out of 15000+600000
+ 607455 words of font info for 118 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 46i,13n,49p,1194b,556s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 46i,13n,49p,1194b,560s stack positions out of 5000i,500n,10000p,200000b,80000s
 {d:/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}{d:/texlive/2020/texm
 f-dist/fonts/enc/dvips/lm/lm-ec.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips
 /lm/lm-mathsy.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}<d:
@@ -977,10 +999,10 @@ exlive/2020/texmf-dist/fonts/type1/public/lm/lmsso10.pfb><d:/texlive/2020/texmf
 -dist/fonts/type1/public/lm/lmsy10.pfb><d:/texlive/2020/texmf-dist/fonts/type1/
 urw/helvetic/uhvb8a.pfb><d:/texlive/2020/texmf-dist/fonts/type1/urw/helvetic/uh
 vr8a.pfb>
-Output written on UGpdf.pdf (12 pages, 614517 bytes).
+Output written on UGpdf.pdf (13 pages, 622763 bytes).
 PDF statistics:
- 334 PDF objects out of 1000 (max. 8388607)
- 286 compressed objects within 3 object streams
- 118 named destinations out of 1000 (max. 500000)
- 8333 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 362 PDF objects out of 1000 (max. 8388607)
+ 311 compressed objects within 4 object streams
+ 133 named destinations out of 1000 (max. 500000)
+ 8341 words of extra memory for PDF output out of 10000 (max. 10000000)
 
