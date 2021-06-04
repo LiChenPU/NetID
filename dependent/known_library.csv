@@ -1,4 +1,4 @@
-name,revised_Query,Compound_Name,HMDB,PubChem,ChEBI,KEGG,METLIN,SMILES,Hilic_20min_QE,Hilic_25min_QE,Hilic_25min_QE2,Hilic_Rutgers_QEPlus,Hilic_30min_QTOF,E_Waters_25min,E_30min,lipids,formula,mass,rdbe
+name,revised_Query,Compound_Name,HMDB,PubChem,ChEBI,KEGG,METLIN,SMILES,Hilic_20min_QE,Hilic_25min_QE,Hilic_25min_QE2,Hilic_Rutgers_QEPlus,Hilic_30min_QTOF,E_Waters_25min,E_30min,No_RT,formula,mass,rdbe
 1-Methyl imidozolacetic Acid Hydrochloride,Methylimidazoleacetic acid,Methylimidazoleacetic acid,HMDB0002820,75810,,C05828,3774,CN1C=C(N=C1)CC(=O)O,,9.05,8.717569058,,,,,,C6H8N2O2,140.0585775,4
 1-Methyl-Histidine,1-Methyl-Histidine,1-Methylhistidine,HMDB0000001,92105,50599,C01152,3741,CN1C=C(N=C1)C[C@@H](C(=O)O)N,7.72,14.76,14.21782534,,14,1.62,,,C7H11N3O2,169.0851266,4
 1-Methyladenosine,1-Methyladenosine,1-Methyladenosine,HMDB0003331,27476,16020,C02494,6888,CN1C=NC2=C(C1=N)N=CN2[C@H]3[C@@H]([C@@H]([C@H](O3)CO)O)O,4.06,6.85,6.598381,2.23,5.65,,12.63,,C11H15N5O4,281.112404,7
