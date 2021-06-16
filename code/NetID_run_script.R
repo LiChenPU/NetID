@@ -4,7 +4,7 @@
   setwd(dirname(rstudioapi::getSourceEditorContext()$path))
   source("NetID_function.R")
   
-  work_dir = "../Mouse_liver_neg/"
+  work_dir = "../Sc_neg/"
   setwd(work_dir)
   printtime = Sys.time()
   timestamp = paste(unlist(regmatches(printtime, gregexpr("[[:digit:]]+", printtime))),collapse = '')
@@ -14,8 +14,10 @@
   Mset = list()
   # Read in files 
   Mset = read_files(filename = "raw_data.csv",
-                    LC_method = "Hilic_25min_QE", # "Hilic_Rutgers_QEPlus" "Hilic_25min_QE", lipids is empty
-                    ion_mode = -1 # 1 for pos mode and -1 for neg mode
+                    known_library_file = "../dependent/known_library.csv",
+                    LC_method = "No_RT", # No_RT
+                    ion_mode = -1, # 1 for pos mode and -1 for neg mode
+                    HMDB_library_file = "../dependent/hmdb_library.csv"
                     )
   Mset = read_MS2data(Mset,
                       MS2_folder = "MS2_neg_200524") # MS2_neg_200524
@@ -54,7 +56,7 @@
 
 # Adjust measured mass by matching to known metabolites ####
 {
-  measured_mz_adjust = T 
+  measured_mz_adjust = F
   if(measured_mz_adjust){
     Sys_msr_error = Check_sys_error(NodeSet, StructureSet, LibrarySet, 
                                     RT_match = F)
@@ -157,6 +159,7 @@
   #                               solution = "lp_solution")
 
 }
+save.image()
 
 # Path annotation ####
 {
@@ -174,6 +177,19 @@
 {
   NetID_output =  get_NetID_output(CplexSet$ilp_nodes, simplified = T)
   write.csv(NetID_output,"NetID_output.csv", row.names = F, na="")
+  
+  # Node and edge lists for cytoscape output
+  cyto_nodes = CplexSet$ilp_nodes %>%
+    filter(ilp_solution > 0.01)
+  cyto_edges = CplexSet$ilp_edges %>%
+    filter(ilp_solution > 0.01 | 
+             (ilp_nodes1 %in% cyto_nodes$ilp_node_id &
+              ilp_nodes2 %in% cyto_nodes$ilp_node_id &
+              category == "Biotransform"))
+  
+  write_csv(cyto_nodes, "cyto_nodes.csv")
+  write_csv(cyto_edges, "cyto_edges.csv")
+  
 }
 
 save.image()

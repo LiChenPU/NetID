@@ -52,7 +52,34 @@ read_files = function(
   
   # known_library contains RT information of documented metabolites
   {
-    Mset[["known_library"]] = read.csv(known_library_file, stringsAsFactors = F)
+    known_library = read.csv(known_library_file, stringsAsFactors = F)
+    
+    colnames(known_library)
+    data(isotopes)
+    formula_check = check_chemform(isotopes, known_library$formula)
+    if(any(formula_check$warning)){
+      warning(paste0("Please check formula in known_library: ", 
+                  paste(formula_check$new_formula[formula_check$warning], collapse = " "), 
+                  "\n",
+                  "These entries are removed."
+                  ))
+    }
+    known_library_new = known_library %>%
+      mutate(old_formula = formula,
+             formula = formula_check$new_formula) %>%
+      filter(!formula_check$warning) %>%
+      mutate(mass = formula_mz(formula),
+             rdbe = formula_rdbe(formula))
+    
+    radical_species = known_library_new$rdbe %% 1 != 0
+    if(any(radical_species)){
+      warning(paste0("Please check the known_library if these are neutral formulas: ", 
+                     paste(known_library_new$old_formula[radical_species], collapse = " ")
+                   
+      ))
+    }
+    
+    Mset[["known_library"]] = known_library_new
     if(LC_method %in% colnames(Mset[["known_library"]])){
       Mset[["known_library"]] = Mset[["known_library"]] %>%
         filter(!is.na(.[,eval(LC_method)]))
@@ -289,13 +316,21 @@ Peak_cleanup = function(Mset,
       medMz[k_min:(k_max-1)]=median(medMz[k_min:(k_max-1)], na.rm = T)
       medRt[k_min:(k_max-1)]=median(medRt[k_min:(k_max-1)], na.rm = T)
       temp = s3[k_min:(k_max-1),first_sample_col_num:ncol_raw]
-      temp[1,] = apply(temp, 2, function(x){
+      # temp[1,] = apply(temp, 2, function(x){
+      #   if(any(!is.na(x))){
+      #     return(max(x, na.rm = T))
+      #   } else {
+      #     return(NA)
+      #   }
+      # })
+      t_temp <- apply(temp, 2, function(x){ #!!!!!
         if(any(!is.na(x))){
           return(max(x, na.rm = T))
         } else {
           return(NA)
         }
       })
+      temp[1,] = matrix(t_temp, nrow = 1, dimnames = list(NULL, names(t_temp)))
       s3[k_min:(k_max-1), first_sample_col_num:ncol_raw] = temp[1,]
     }
     
@@ -653,6 +688,7 @@ Check_sys_error = function(NodeSet, StructureSet, LibrarySet,
   names(library_RT) = LibrarySet$library_id
   
   node_mass = sapply(NodeSet, "[[", "mz")
+  
   known_library_msr = bind_rows(StructureSet) %>% 
     filter(parent_id %in% known_library$library_id & transform == "") %>%
     mutate(msr_mass = node_mass[node_id], 
@@ -673,16 +709,21 @@ Check_sys_error = function(NodeSet, StructureSet, LibrarySet,
   if(RT_match){
     known_library_msr = known_library_msr %>%
       filter(rt_match)
-    lsq_result = lm(known_library_msr$mass_dif~known_library_msr$msr_mass)
+    if(nrow(known_library_msr) > 1){
+      lsq_result = lm(known_library_msr$mass_dif~known_library_msr$msr_mass)
+    }
   }
   
+  if(nrow(known_library_msr) < 10){
+    warning(paste0("Too few entries in known library can be matched to data. Try set RT_match = F, or measured_mz_adjust = F "))
+    return(list(ppm_adjust = 0, 
+                abs_adjust = 0, 
+                fitdistData = NULL))
+  }
   
   ppm_adjust = as.numeric(lsq_result$coefficients[2] * 10^6)
   abs_adjust = as.numeric(lsq_result$coefficients[1])
   
-  
-  #
-  # plot(known_library_msr$msr_mass, known_library_msr$mass_dif)
   ## Normal test 
   # shapiro.test(known_library_msr$mass_dif)
   # shapiro.test(known_library_msr$ppm_mass_dif)
@@ -986,15 +1027,19 @@ Experiment_MS2_fragment_connection = function(peak_group, NodeSet, ppm_tol = 10,
     return(NULL)
   }
   
-  H_mass = 1.00782503224
-  e_mass = 0.00054857990943
-  ion_mode = Mset$global_parameter$mode
-  
   peak_group_MS2 = peak_group %>%
     filter(node2 %in% node_MS2 & inten2 > log10(inten_threshold),
            node1 != node2,
            mass1 < mass2) %>%
     split(.$node2)
+  
+  if(length(peak_group_MS2)==0){
+    return(NULL)
+  }
+  
+  H_mass = 1.00782503224
+  e_mass = 0.00054857990943
+  ion_mode = Mset$global_parameter$mode
   
   experiment_MS2_fragment_ls = list()
   for(i in 1:length(peak_group_MS2)){
@@ -1905,6 +1950,10 @@ Score_structureset_MS2 = function(StructureSet_df, NodeSet, Mset,
     mutate(contain_lib_MS2 = note %in% MS2_library_external_id) %>%
     filter(contain_msr_MS2, contain_lib_MS2)
   
+  if(nrow(StructureSet_df_MS2)==0){
+    return(NULL)
+  }
+  
   fwd_dp = rev_dp = rep(0, nrow(StructureSet_df_MS2))
   
   for(i in 1:nrow(StructureSet_df_MS2)){
@@ -2465,6 +2514,8 @@ Score_MS2_experiment_biotransform = function(ilp_edges, NodeSet,
     distinct(node1, node2, .keep_all = T) %>%
     filter(category == "Biotransform") %>% 
     filter(node1 %in% node_MS2, node2 %in% node_MS2)
+  
+  if(nrow(ilp_edges_MS2_similarity)==0){return (NULL)}
   
   fwd_dp = rev_dp = rep(0, nrow(ilp_edges_MS2_similarity))
   for(i in 1:nrow(ilp_edges_MS2_similarity)){
