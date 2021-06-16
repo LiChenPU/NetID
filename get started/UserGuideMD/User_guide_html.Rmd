@@ -1,12 +1,13 @@
 ---
-title: "Supplementary Note 1 - NetID User Guide"
+title: "NetID User Guide"
 author: "Li Chen, Ziyang Chen"
-date: "5/31/2021"
-geometry: "margin=1cm"
+date: "2021/6/1"
+# output:
+#    html_document:
+#      toc: true
 output:
-  BiocStyle::pdf_document:
-    
-    toc: F
+  BiocStyle::html_document:
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -14,6 +15,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 A primary goal of liquid chromatography-high resolution mass spectrometry (LC-MS)-based metabolomics is to identify all metabolites, but most LC-MS peaks remain unidentified. Here, we present a global network optimization approach, NetID, to annotate untargeted LC-MS metabolomics data. We consider all experimentally observed ion peaks together, and assign annotations to all of them simultaneously so as to maximize a score that considers properties of peaks (known masses, retention times, MS/MS fragmentation patterns). Global optimization results in accurate peak assignment and trackable peak-peak relationships in the output network. Applying this approach to yeast and mouse data, we identify 5 novel metabolites, including thiamine and taurine derivatives. Isotope tracer studies indicate active flux through these metabolites. Thus, NetID applies existing metabolomic knowledge and global optimization to annotate untargeted metabolomics data, revealing novel metabolites.   
+
+NetID requires (1) a peak table containing m/z, RT and intensity from high-resolution mass spectrometry data. (2) a reference compound database, which we provide HMDB, YMDB, a lite version of PubChem (PubChemLite.0.2.0) and a subset of 47,101 biopathway related entries (PubChemLite_Bio) for user to choose. (3) a transformation table, which we assembled a list of 25 biochemical atom differences and 59 abiotic atom differences. NetID optionally use (4) a list of excel files containing MS2 fragmentation information (m/z and intensity) for peaks in the above peak table. (5) a list of known metabolites’ retention time, which we provide our in-house retention time list for demonstration. Users can customize the compound database, the transformation table and the retention time list following the user guide. 
+Currently the algorithm is developed using Thermo Orbitrap instruments results. We anticipate the algorithm will work for other high mass accuracy data, such as TOF data, but parameters may need to be optimized for the best performance.  
+
 Citation: https://www.biorxiv.org/content/10.1101/2021.01.06.425569v1  
 Git-hub: https://github.com/LiChenPU/NetID
 
@@ -22,15 +27,14 @@ Git-hub: https://github.com/LiChenPU/NetID
 This section provides step-by-step instructions to set up the environment to run NetID algorithm in a local computer. A Windows system is recommended. Typical install time on a "normal" desktop computer is within a few hours.
 
 ## Software installation
-* Install R, Rstudio, Rtools40, ILOG CPLEX Optimization Studio (CPLEX), preferably at default location.
+* Install R, Rstudio, Rtools40, ILOG CPLEX Optimization Studio (CPLEX) and Git, preferably at default location.
 
-    >**R**(4.0 or later): <https://www.r-project.org/>  
+    >**R**(version 4.0, 4.1 tested): <https://www.r-project.org/>  
     >**RStudio**: <https://rstudio.com/products/rstudio/download>  
     >**Rtools40**: <https://cran.r-project.org/bin/windows/Rtools/ow>  
-    >**CPLEX**(12.8 or later): <https://www.ibm.com/academic/technology/data-science>  
-
-* You need to add R and Rtools40 to Environmental Variables PATH, with instruction provided at the end. 
-
+    >**CPLEX**(version 12.8,12.10,20.10 tested): <https://www.ibm.com/academic/technology/data-science>  
+    >**Git**: <https://git-scm.com/downloads>
+    
 ## Code download
 
 ### Via Git (recommended)
@@ -51,26 +55,33 @@ Most of the dependent packages can be installed by running the R script `NetID_p
 
 The package, **cplexAPI**, connecting R to CPLEX, requires additional installation steps.
 
-1. Go to website: <https://cran.r-project.org/web/packages/cplexAPI/index.html>, look for `Package source`, and download `cplexAPI_1.4.0.tar.gz`. In the same page, look for `Materials`, and open the `INSTALL link`
+1. Go to website: <https://cran.r-project.org/web/packages/cplexAPI/index.html>, look for `Package source`, and download `cplexAPI_1.4.0.tar.gz`. In the same page, look for `Materials`, a package installation guide can be found in the link `INSTALL`. 
 
-2. Unzip the folder `cplexAPI` to the **desktop**, follow the installation guide to modify the file `Makevars.win`.  
+2. Unzip the folder `cplexAPI` to the **desktop**, open subfolder `src`, follow the installation guide to modify the file `Makevars.win`.  
 *Note*: Replace `\` in the `Makevars.win` file into `/` in order for R to recognize the path.  
-    * For example, the `-I"${CPLEX_STUDIO_DIR}\cplex\include"` should be replaced with path such as:  
+    * For example, the `-I"${CPLEX_STUDIO_DIR}\cplex\include"` should be replaced with the path CPLEX_studio is installed, such as:  
     `-I"C:/Program Files/IBM/ILOG/CPLEX_Studio1210/cplex/include"`   
-    * The `-L"${CPLEX_STUDIO_LIB}"` should be replaced with path such as:  
+    * The `-L"${CPLEX_STUDIO_LIB}"` should be replaced with the path CPLEX_studio is installed, such as:  
     `-L"C:/Program Files/IBM/ILOG/CPLEX_Studio1210/cplex/bin/x64_win64"`
 
-3. In command line, run line below to build package, change `${Username}` to actual name.  
-`R CMD build --no-build-vignettes --no-manual --md5 "C:\Users\${Username}\Desktop\cplexAPI"`  
-a new package `cplexAPI_1.4.0.tar.gz` will be built under the default path (for example, `C:\Users\${Username}`)
+3. build package, 
+    * In command line, change `${Username}` to the actual user name and run line below, 
+    `R CMD build --no-build-vignettes --no-manual --md5 "C:\Users\${Username}\Desktop\cplexAPI"`  
+
+    * Alternatively, you can run the lines below in Rstudio:  
+    `setwd('C:/Users/${Username}/Desktop/cplexAPI')`
+    `devtools::build(vignettes = FALSE)`
+
+    a new package `cplexAPI_1.4.0.tar.gz` will be built under the default path (for example, `C:\Users\${Username}`)
+
+    *Note*: You need to add R and Rtools40 to Environmental Variables PATH, with instruction provided at the end. 
 
 4. In command line, run line below to install package.  
 `R CMD INSTALL --build --no-multiarch .\cplexAPI_1.4.0.tar.gz`  
 If you see `DONE (cplexAPI)`, then the package installation is successful.  
-    * *Note*: if error occurs relating to `__declspec(dllimport deprecated)`, you need to go to `C:\Program Files\IBM\ILOG\CPLEX_Studio1210\cplex\include\ilcplex` (or other installation path), open the `file cpxconst.h`, go to the line indicated in the error message or search for `__declspec(dllimport deprecated)`, add `_` to `__declspec(dllimport deprecated)`, making it to `__declspec(dllimport_deprecated)`. Save file and repeat *step 4*.
+    * *Note*: if error occurs relating to `__declspec(dllimport deprecated)`, you need to go to `C:\Program Files\IBM\ILOG\CPLEX_Studio1210\cplex\include\ilcplex` (or other installation path), open the file `cpxconst.h`, go to the line indicated in the error message or search for `__declspec(dllimport deprecated)`, add `_` to `__declspec(dllimport deprecated)`, making it to `__declspec(dllimport_deprecated)`. Save file and repeat *step 4*.
 
-5. To take a short venture using CPLEX in R, refer to **Package cplexAPI – Quick Start** in <https://cran.r-project.org/web/packages/cplexAPI/index.html>.
-
+5. To test if cplexAPI is installed properly and to take a short venture using CPLEX in R, refer to **Package cplexAPI – Quick Start** in <https://cran.r-project.org/web/packages/cplexAPI/index.html>.
 
 # Using NetID
 This section will use yeast negative-mode dataset and mouse liver negative-mode dataset as examples to walk through the NetID workflow.
@@ -262,7 +273,7 @@ Setting the LC_method = "No_RT". Then RT information will not be considered in t
 
 ### Score Setting
 
-See Supplementary Note 2 of NetID paper for explanation of how scores work
+See Supplementary Note 2 of NetID paper for explanation 
 
 # NetID Visualization
 
@@ -306,10 +317,10 @@ This part provides instruction to visualize and explore **NetID** output results
 1. On the left panel, you can enter a m/z or a formula to search your peak of interest. For example, 180.0631 or C6H12O6 will automatically update the data table on the right. Enter 0 to restore full list for the data table. 
 
 2. Change ionization and ppm window to adjust calculated m/z.
-W
+
 3. On the right, you can explore the peak list in an interactive data table, including global text search on top right, specifying ranges for numeric column or searching text within character columns, ranking each column etc.
 
-![](f1.png)
+<img src="f1.png" width="150%">
 
 ### Network Visualization
 
@@ -320,11 +331,11 @@ W
 3. Biochemical graph shows biochemical connections. Abiotic graph shows abiotic connections. Node labels and Edge labels determines if the graph show node or edge labels. Optimized only determines whether to show only the optimal annotations or all possible annotations in the network. 
 4. When setting parameters, hit plot to see the network graph.
 
-![](f2.png)
+<img src="f2.png" width="100%">
 
 5. A sample network graph is shown below (a different center node may give less complicated graph). You may edit the nodes or edges (top left), move figures with the arrow buttons (bottom left), and zoom in/out or center figure (bottom right). 
 
-![](f3.png)
+<img src="f3.png" width="100%">
 
 6. You can use the “Download plot” button to download a html webpage to visualize the network graph independent of the Shiny app, and the “Download csv” button to download the information of the nodes in the network. The download buttons will appear after hitting the plot button. Note: edits within the Shiny app will not go into the html file.
 
@@ -338,7 +349,7 @@ Scroll left or right, or select the entry number, to visualize different annotat
 2. In the data table, class has 3 possible entries: Metabolite if it is documented in database such as HMDB library; Putative metabolite if it is transformed from a metabolite through a biotransformation edge; and Artifact if it is transformed by an abiotic edge.  
 Use the download button to download the data table
 
-![](f4.png)
+<img src="f4.png" width="100%">
 
 
 # Troubleshooting

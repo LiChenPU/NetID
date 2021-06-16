@@ -11,7 +11,6 @@
 
 <meta name="author" content="Li Chen, Ziyang Chen" />
 
-<meta name="date" content="2021-06-02" />
 
 <title>NetID User Guide</title>
 
@@ -1853,13 +1852,15 @@ function toggle_visibility(id1) {
 
 <h1 class="title toc-ignore">NetID User Guide</h1>
 <p class="author-name">Li Chen, Ziyang Chen</p>
-<h4 class="date">2 June 2021</h4>
+<h4 class="date">2021/6/1</h4>
 
 </div>
 
 
-<p>A primary goal of liquid chromatography-high resolution mass spectrometry (LC-MS)-based metabolomics is to identify all metabolites, but most LC-MS peaks remain unidentified. Here, we present a global network optimization approach, NetID, to annotate untargeted LC-MS metabolomics data. We consider all experimentally observed ion peaks together, and assign annotations to all of them simultaneously so as to maximize a score that considers properties of peaks (known masses, retention times, MS/MS fragmentation patterns). Global optimization results in accurate peak assignment and trackable peak-peak relationships in the output network. Applying this approach to yeast and mouse data, we identify 5 novel metabolites, including thiamine and taurine derivatives. Isotope tracer studies indicate active flux through these metabolites. Thus, NetID applies existing metabolomic knowledge and global optimization to annotate untargeted metabolomics data, revealing novel metabolites.<br />
-Citation: <a href="https://www.biorxiv.org/content/10.1101/2021.01.06.425569v1" class="uri">https://www.biorxiv.org/content/10.1101/2021.01.06.425569v1</a><br />
+<p>A primary goal of liquid chromatography-high resolution mass spectrometry (LC-MS)-based metabolomics is to identify all metabolites, but most LC-MS peaks remain unidentified. Here, we present a global network optimization approach, NetID, to annotate untargeted LC-MS metabolomics data. We consider all experimentally observed ion peaks together, and assign annotations to all of them simultaneously so as to maximize a score that considers properties of peaks (known masses, retention times, MS/MS fragmentation patterns). Global optimization results in accurate peak assignment and trackable peak-peak relationships in the output network. Applying this approach to yeast and mouse data, we identify 5 novel metabolites, including thiamine and taurine derivatives. Isotope tracer studies indicate active flux through these metabolites. Thus, NetID applies existing metabolomic knowledge and global optimization to annotate untargeted metabolomics data, revealing novel metabolites.</p>
+<p>NetID requires (1) a peak table containing m/z, RT and intensity from high-resolution mass spectrometry data. (2) a reference compound database, which we provide HMDB, YMDB, a lite version of PubChem (PubChemLite.0.2.0) and a subset of 47,101 biopathway related entries (PubChemLite_Bio) for user to choose. (3) a transformation table, which we assembled a list of 25 biochemical atom differences and 59 abiotic atom differences. NetID optionally use (4) a list of excel files containing MS2 fragmentation information (m/z and intensity) for peaks in the above peak table. (5) a list of known metabolites’ retention time, which we provide our in-house retention time list for demonstration. Users can customize the compound database, the transformation table and the retention time list following the user guide.
+Currently the algorithm is developed using Thermo Orbitrap instruments results. We anticipate the algorithm will work for other high mass accuracy data, such as TOF data, but parameters may need to be optimized for the best performance.</p>
+<p>Citation: <a href="https://www.biorxiv.org/content/10.1101/2021.01.06.425569v1" class="uri">https://www.biorxiv.org/content/10.1101/2021.01.06.425569v1</a><br />
 Git-hub: <a href="https://github.com/LiChenPU/NetID" class="uri">https://github.com/LiChenPU/NetID</a></p>
 <div id="environment-setup" class="section level1">
 <h1><span class="header-section-number">1</span> Environment Setup</h1>
@@ -1867,14 +1868,14 @@ Git-hub: <a href="https://github.com/LiChenPU/NetID" class="uri">https://github.
 <div id="software-installation" class="section level2">
 <h2><span class="header-section-number">1.1</span> Software installation</h2>
 <ul>
-<li><p>Install R, Rstudio, Rtools40, ILOG CPLEX Optimization Studio (CPLEX), preferably at default location.</p>
+<li><p>Install R, Rstudio, Rtools40, ILOG CPLEX Optimization Studio (CPLEX) and Git, preferably at default location.</p>
 <blockquote>
-<p><strong>R</strong>(4.0 or later): <a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a><br />
+<p><strong>R</strong>(version 4.0, 4.1 tested): <a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a><br />
 <strong>RStudio</strong>: <a href="https://rstudio.com/products/rstudio/download" class="uri">https://rstudio.com/products/rstudio/download</a><br />
 <strong>Rtools40</strong>: <a href="https://cran.r-project.org/bin/windows/Rtools/ow" class="uri">https://cran.r-project.org/bin/windows/Rtools/ow</a><br />
-<strong>CPLEX</strong>(12.8 or later): <a href="https://www.ibm.com/academic/technology/data-science" class="uri">https://www.ibm.com/academic/technology/data-science</a></p>
+<strong>CPLEX</strong>(version 12.8,12.10,20.10 tested): <a href="https://www.ibm.com/academic/technology/data-science" class="uri">https://www.ibm.com/academic/technology/data-science</a><br />
+<strong>Git</strong>: <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></p>
 </blockquote></li>
-<li><p>You need to add R and Rtools40 to Environmental Variables PATH, with instruction provided at the end.</p></li>
 </ul>
 </div>
 <div id="code-download" class="section level2">
@@ -1899,26 +1900,33 @@ Git-hub: <a href="https://github.com/LiChenPU/NetID" class="uri">https://github.
 <p>Most of the dependent packages can be installed by running the R script <code>NetID_packages.R</code> in the <code>get started</code> folder. See <strong>Troubleshooting</strong> section for possible errors.</p>
 <p>The package, <strong>cplexAPI</strong>, connecting R to CPLEX, requires additional installation steps.</p>
 <ol style="list-style-type: decimal">
-<li><p>Go to website: <a href="https://cran.r-project.org/web/packages/cplexAPI/index.html" class="uri">https://cran.r-project.org/web/packages/cplexAPI/index.html</a>, look for <code>Package source</code>, and download <code>cplexAPI_1.4.0.tar.gz</code>. In the same page, look for <code>Materials</code>, and open the <code>INSTALL link</code></p></li>
-<li><p>Unzip the folder <code>cplexAPI</code> to the <strong>desktop</strong>, follow the installation guide to modify the file <code>Makevars.win</code>.<br />
+<li><p>Go to website: <a href="https://cran.r-project.org/web/packages/cplexAPI/index.html" class="uri">https://cran.r-project.org/web/packages/cplexAPI/index.html</a>, look for <code>Package source</code>, and download <code>cplexAPI_1.4.0.tar.gz</code>. In the same page, look for <code>Materials</code>, a package installation guide can be found in the link <code>INSTALL</code>.</p></li>
+<li><p>Unzip the folder <code>cplexAPI</code> to the <strong>desktop</strong>, open subfolder <code>src</code>, follow the installation guide to modify the file <code>Makevars.win</code>.<br />
 <em>Note</em>: Replace <code>\</code> in the <code>Makevars.win</code> file into <code>/</code> in order for R to recognize the path.</p>
 <ul>
-<li>For example, the <code>-I&quot;${CPLEX_STUDIO_DIR}\cplex\include&quot;</code> should be replaced with path such as:<br />
+<li>For example, the <code>-I&quot;${CPLEX_STUDIO_DIR}\cplex\include&quot;</code> should be replaced with the path CPLEX_studio is installed, such as:<br />
 <code>-I&quot;C:/Program Files/IBM/ILOG/CPLEX_Studio1210/cplex/include&quot;</code><br />
 </li>
-<li>The <code>-L&quot;${CPLEX_STUDIO_LIB}&quot;</code> should be replaced with path such as:<br />
+<li>The <code>-L&quot;${CPLEX_STUDIO_LIB}&quot;</code> should be replaced with the path CPLEX_studio is installed, such as:<br />
 <code>-L&quot;C:/Program Files/IBM/ILOG/CPLEX_Studio1210/cplex/bin/x64_win64&quot;</code></li>
 </ul></li>
-<li><p>In command line, run line below to build package, change <code>${Username}</code> to actual name.<br />
-<code>R CMD build --no-build-vignettes --no-manual --md5 &quot;C:\Users\${Username}\Desktop\cplexAPI&quot;</code><br />
-a new package <code>cplexAPI_1.4.0.tar.gz</code> will be built under the default path (for example, <code>C:\Users\${Username}</code>)</p></li>
+<li><p>build package,</p>
+<ul>
+<li><p>In command line, change <code>${Username}</code> to the actual user name and run line below,
+<code>R CMD build --no-build-vignettes --no-manual --md5 &quot;C:\Users\${Username}\Desktop\cplexAPI&quot;</code></p></li>
+<li><p>Alternatively, you can run the lines below in Rstudio:<br />
+<code>setwd(&#39;C:/Users/${Username}/Desktop/cplexAPI&#39;)</code>
+<code>devtools::build(vignettes = FALSE)</code></p></li>
+</ul>
+<p>a new package <code>cplexAPI_1.4.0.tar.gz</code> will be built under the default path (for example, <code>C:\Users\${Username}</code>)</p>
+<p><em>Note</em>: You need to add R and Rtools40 to Environmental Variables PATH, with instruction provided at the end.</p></li>
 <li><p>In command line, run line below to install package.<br />
 <code>R CMD INSTALL --build --no-multiarch .\cplexAPI_1.4.0.tar.gz</code><br />
 If you see <code>DONE (cplexAPI)</code>, then the package installation is successful.</p>
 <ul>
-<li><em>Note</em>: if error occurs relating to <code>__declspec(dllimport deprecated)</code>, you need to go to <code>C:\Program Files\IBM\ILOG\CPLEX_Studio1210\cplex\include\ilcplex</code> (or other installation path), open the <code>file cpxconst.h</code>, go to the line indicated in the error message or search for <code>__declspec(dllimport deprecated)</code>, add <code>_</code> to <code>__declspec(dllimport deprecated)</code>, making it to <code>__declspec(dllimport_deprecated)</code>. Save file and repeat <em>step 4</em>.</li>
+<li><em>Note</em>: if error occurs relating to <code>__declspec(dllimport deprecated)</code>, you need to go to <code>C:\Program Files\IBM\ILOG\CPLEX_Studio1210\cplex\include\ilcplex</code> (or other installation path), open the file <code>cpxconst.h</code>, go to the line indicated in the error message or search for <code>__declspec(dllimport deprecated)</code>, add <code>_</code> to <code>__declspec(dllimport deprecated)</code>, making it to <code>__declspec(dllimport_deprecated)</code>. Save file and repeat <em>step 4</em>.</li>
 </ul></li>
-<li><p>To take a short venture using CPLEX in R, refer to <strong>Package cplexAPI – Quick Start</strong> in <a href="https://cran.r-project.org/web/packages/cplexAPI/index.html" class="uri">https://cran.r-project.org/web/packages/cplexAPI/index.html</a>.</p></li>
+<li><p>To test if cplexAPI is installed properly and to take a short venture using CPLEX in R, refer to <strong>Package cplexAPI – Quick Start</strong> in <a href="https://cran.r-project.org/web/packages/cplexAPI/index.html" class="uri">https://cran.r-project.org/web/packages/cplexAPI/index.html</a>.</p></li>
 </ol>
 </div>
 </div>
