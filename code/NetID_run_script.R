@@ -14,12 +14,13 @@
   Mset = list()
   # Read in files 
   Mset = read_files(filename = "raw_data.csv",
-                    LC_method = "Hilic_25min_QE", # "Hilic_Rutgers_QEPlus" "Hilic_25min_QE", lipids is empty
+                    known_library_file = "../dependent/known_library.csv",
+                    LC_method = "No_RT", # No_RT
                     ion_mode = -1, # 1 for pos mode and -1 for neg mode
                     HMDB_library_file = "../dependent/hmdb_library.csv"
                     )
   Mset = read_MS2data(Mset,
-                      MS2_folder = "MS2") # MS2_neg_200524
+                      MS2_folder = "MS2_neg_200524") # MS2_neg_200524
 }
 
 # Data cleaning ####
@@ -55,10 +56,10 @@
 
 # Adjust measured mass by matching to known metabolites ####
 {
-  measured_mz_adjust = T 
+  measured_mz_adjust = F
   if(measured_mz_adjust){
     Sys_msr_error = Check_sys_error(NodeSet, StructureSet, LibrarySet, 
-                                    RT_match = T)
+                                    RT_match = F)
     
     mass_adjustment = abs(Sys_msr_error$ppm_adjust + Sys_msr_error$abs_adjust/250*1e6) > 0.2
     
@@ -158,6 +159,7 @@
   #                               solution = "lp_solution")
 
 }
+save.image()
 
 # Path annotation ####
 {
