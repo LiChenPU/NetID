@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.31)  17 JUN 2021 00:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.31)  21 JUL 2021 21:27
 entering extended mode
 **./User_guide_pdf.tex
 (User_guide_pdf.tex
@@ -798,38 +798,9 @@ File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
 (Font)              scaled to size 7.98004pt on input line 181.
-LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 209.
 
-Underfull \hbox (badness 10000) in paragraph at lines 214--217
+Underfull \hbox (badness 10000) in paragraph at lines 228--231
 
- []
-
-
-Underfull \hbox (badness 2653) in paragraph at lines 225--228
-[]\T1/lmss/m/n/10 (+20) In com-mand line, change [][]\T1/fvm/m/n/10 ${User[][]n
-ame}[] \T1/lmss/m/n/10 (+20) to the ac-tual user name and
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 225--228
-\T1/lmss/m/n/10 (+20) run line be-low, [][]\T1/fvm/m/n/10 R[] [][][]CMD[] [][][
-]build[] [][][]-[][]-[]no[]-[]build[]-[]vi[][]gnettes[] [][][]-[][]-[]no[]-[]ma
-n[][]ual[] [][][]-[][]-[]md5[]
- []
-
-LaTeX Font Info:    Trying to load font information for TS1+fvm on input line 2
-29.
-(C:\Users\Li\AppData\Roaming\MiKTeX\tex/latex/bera\ts1fvm.fd
-File: ts1fvm.fd 2004/09/07 scalable font definitions for TS1/fvm.
-)
-LaTeX Font Info:    Font shape `TS1/fvm/m/n' will be
-(Font)              scaled to size 7.98004pt on input line 229.
-
-Overfull \hbox (6.19301pt too wide) in paragraph at lines 228--231
-[][]\T1/fvm/m/n/10 setwd(\TS1/fvm/m/n/10 '\T1/fvm/m/n/10 C:/Users/${Username}/D
-esktop/cplexAPI\TS1/fvm/m/n/10 '\T1/fvm/m/n/10 )[] [][]de[][]v[][]tools::build(
-vignettes[]
  []
 
 
@@ -841,18 +812,34 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
 [2]
-Underfull \hbox (badness 3219) in paragraph at lines 244--245
-\T1/lmss/m/n/10 (+20) di-cated in the er-ror mes-sage or search for [][]\T1/fvm
-/m/n/10 __de[][]clspec(dllimport[] [][][]dep[]
+Underfull \hbox (badness 2653) in paragraph at lines 241--244
+[]\T1/lmss/m/n/10 (+20) In com-mand line, change [][]\T1/fvm/m/n/10 ${User[][]n
+ame}[] \T1/lmss/m/n/10 (+20) to the ac-tual user name and
  []
 
 
-Underfull \hbox (badness 3579) in paragraph at lines 244--245
-[]\T1/fvm/m/n/10 re[][]cated)[]\T1/lmss/m/n/10 (+20) , add [][]\T1/fvm/m/n/10 _
-[] \T1/lmss/m/n/10 (+20) to [][]\T1/fvm/m/n/10 __de[][]clspec(dllimport[] [][][
-]dep[][]re[][]cated)[]\T1/lmss/m/n/10 (+20) , mak-ing it to
+Underfull \hbox (badness 10000) in paragraph at lines 241--244
+\T1/lmss/m/n/10 (+20) run line be-low, [][]\T1/fvm/m/n/10 R[] [][][]CMD[] [][][
+]build[] [][][]-[][]-[]no[]-[]build[]-[]vi[][]gnettes[] [][][]-[][]-[]no[]-[]ma
+n[][]ual[] [][][]-[][]-[]md5[]
  []
 
+LaTeX Font Info:    Trying to load font information for TS1+fvm on input line 2
+45.
+(C:\Users\Li\AppData\Roaming\MiKTeX\tex/latex/bera\ts1fvm.fd
+File: ts1fvm.fd 2004/09/07 scalable font definitions for TS1/fvm.
+)
+LaTeX Font Info:    Font shape `TS1/fvm/m/n' will be
+(Font)              scaled to size 7.98004pt on input line 245.
+
+Overfull \hbox (6.19301pt too wide) in paragraph at lines 244--247
+[][]\T1/fvm/m/n/10 setwd(\TS1/fvm/m/n/10 '\T1/fvm/m/n/10 C:/Users/${Username}/D
+esktop/cplexAPI\TS1/fvm/m/n/10 '\T1/fvm/m/n/10 )[] [][]de[][]v[][]tools::build(
+vignettes[]
+ []
+
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 256.
 
 Package fancyhdr Warning: \headheight is too small (42.67912pt): 
 (fancyhdr)                Make it at least 46.27916pt, for example:
@@ -862,18 +849,18 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
 [3]
-Overfull \hbox (15.8146pt too wide) in paragraph at lines 337--337
+Overfull \hbox (15.8146pt too wide) in paragraph at lines 344--344
 []\T1/fvm/m/n/10 "Optimization ended successfull - integer optimal, tolerance -
  OBJ_value = 2963.71[] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 349--351
+Underfull \hbox (badness 10000) in paragraph at lines 356--358
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--353
+Underfull \hbox (badness 10000) in paragraph at lines 358--360
 
  []
 
@@ -886,16 +873,16 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
 [4]
-Overfull \hbox (22.48839pt too wide) in paragraph at lines 377--379
+Overfull \hbox (22.48839pt too wide) in paragraph at lines 384--386
 []\T1/lmss/m/n/10 (-20) If \T1/lmss/bx/n/10 (-20) Pro-te-oWiz-ard \T1/lmss/m/n/
 10 (-20) is in-stalled in lo-ca-tion other than [][]\T1/fvm/m/n/10 C:/Program[]
  [][][]Files/ProteoWizard/ProteoWizard[]
  []
 
 LaTeX Font Info:    Font shape `T1/fvm/m/it' in size <10> not available
-(Font)              Font shape `T1/fvm/m/sl' tried instead on input line 408.
+(Font)              Font shape `T1/fvm/m/sl' tried instead on input line 415.
 LaTeX Font Info:    Font shape `T1/fvm/m/sl' will be
-(Font)              scaled to size 7.98004pt on input line 408.
+(Font)              scaled to size 7.98004pt on input line 415.
 
 Package fancyhdr Warning: \headheight is too small (42.67912pt): 
 (fancyhdr)                Make it at least 46.27916pt, for example:
@@ -905,27 +892,17 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 463--465
+Underfull \hbox (badness 10000) in paragraph at lines 470--472
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 465--467
+Underfull \hbox (badness 10000) in paragraph at lines 472--474
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 467--469
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 469--471
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 471--473
+Underfull \hbox (badness 10000) in paragraph at lines 474--476
 
  []
 
@@ -938,14 +915,24 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
 [6]
-Overfull \hbox (15.86342pt too wide) in paragraph at lines 514--515
+Underfull \hbox (badness 10000) in paragraph at lines 476--478
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 478--480
+
+ []
+
+
+Overfull \hbox (15.86342pt too wide) in paragraph at lines 521--522
 []\T1/lmss/m/n/10 (-20) To se-lect the de-sired database, change [][]\T1/fvm/m/
 n/10 HMDB_library_file[] [][][]=[] [][][]"../de[][]pen[][]dent/hmdb_library.csv
 "[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 514--515
+Underfull \hbox (badness 10000) in paragraph at lines 521--522
 \T1/lmss/m/n/10 (+20) to [][]\T1/fvm/m/n/10 ../de[][]pen[][]dent/ymdb_library.c
 sv[]\T1/lmss/m/n/10 (+20) , [][]\T1/fvm/m/n/10 ../de[][]pen[][]dent/pbcm_librar
 y.csv[] \T1/lmss/m/n/10 (+20) or [][]\T1/fvm/m/n/10 ../de[][]pen[]
@@ -961,7 +948,7 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 
 [7]
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 9.57605pt on input line 576.
+(Font)              scaled to size 9.57605pt on input line 583.
 
 Package fancyhdr Warning: \headheight is too small (42.67912pt): 
 (fancyhdr)                Make it at least 46.27916pt, for example:
@@ -980,14 +967,14 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 701--703
+Underfull \hbox (badness 10000) in paragraph at lines 708--710
 []\T1/lmss/m/n/10 (+20) Run \T1/lmss/bx/n/10 (+20) Cy-toscape\T1/lmss/m/n/10 (+
 20) , click [][]\T1/fvm/m/n/10 im[][]port[] [][][]net[][]work[] [][][]from[] []
 [][]file[] [][][]sys[][]tem[]\T1/lmss/m/n/10 (+20) , and load
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 701--703
+Underfull \hbox (badness 10000) in paragraph at lines 708--710
 
  []
 
@@ -1000,20 +987,29 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
 [10]
-<f1.png, id=277, 498.663pt x 87.7095pt>
+<f1.png, id=290, 498.663pt x 87.7095pt>
 File: f1.png Graphic file (type png)
 <use f1.png>
-Package pdftex.def Info: f1.png  used on input line 749.
+Package pdftex.def Info: f1.png  used on input line 756.
 (pdftex.def)             Requested size: 384.11626pt x 67.56194pt.
-<f2.png, id=279, 354.123pt x 85.0815pt>
+<f2.png, id=292, 354.123pt x 85.0815pt>
 File: f2.png Graphic file (type png)
 <use f2.png>
-Package pdftex.def Info: f2.png  used on input line 766.
+Package pdftex.def Info: f2.png  used on input line 773.
 (pdftex.def)             Requested size: 354.13292pt x 85.08388pt.
-<f3.png, id=280, 668.4975pt x 634.62094pt>
+
+Package fancyhdr Warning: \headheight is too small (42.67912pt): 
+(fancyhdr)                Make it at least 46.27916pt, for example:
+(fancyhdr)                \setlength{\headheight}{46.27916pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
+
+[11 <./f1.png>]
+<f3.png, id=312, 668.4975pt x 634.62094pt>
 File: f3.png Graphic file (type png)
 <use f3.png>
-Package pdftex.def Info: f3.png  used on input line 776.
+Package pdftex.def Info: f3.png  used on input line 783.
 (pdftex.def)             Requested size: 384.11786pt x 364.65244pt.
 
 Package fancyhdr Warning: \headheight is too small (42.67912pt): 
@@ -1023,23 +1019,14 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
-[11 <./f1.png> <./f2.png>]
-<f4.png, id=301, 384.4764pt x 317.5062pt>
+[12 <./f2.png> <./f3.png>]
+<f4.png, id=321, 384.4764pt x 317.5062pt>
 File: f4.png Graphic file (type png)
 <use f4.png>
-Package pdftex.def Info: f4.png  used on input line 801.
+Package pdftex.def Info: f4.png  used on input line 808.
 (pdftex.def)             Requested size: 384.11757pt x 317.20987pt.
-
-Package fancyhdr Warning: \headheight is too small (42.67912pt): 
-(fancyhdr)                Make it at least 46.27916pt, for example:
-(fancyhdr)                \setlength{\headheight}{46.27916pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
-
-[12 <./f3.png>]
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 11.49124pt on input line 807.
+(Font)              scaled to size 11.49124pt on input line 814.
 
 Package fancyhdr Warning: \headheight is too small (42.67912pt): 
 (fancyhdr)                Make it at least 46.27916pt, for example:
@@ -1049,7 +1036,7 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
 [13 <./f4.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 840--845
+Underfull \hbox (badness 10000) in paragraph at lines 847--852
 [][]\T1/fvm/m/n/10 write[][]Lines(\TS1/fvm/m/n/10 '\T1/fvm/m/n/10 PATH="${RTOOL
 S40_HOME}\\usr\\bin;${PATH}"\TS1/fvm/m/n/10 '\T1/fvm/m/n/10 ,[] [][][]con[] [][
 ][]=[] [][][]"~/.Ren[][]v[][]i[]
@@ -1065,16 +1052,16 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 
 [14] (User_guide_pdf.aux)
 Package rerunfilecheck Info: File `User_guide_pdf.out' has not changed.
-(rerunfilecheck)             Checksum: 66F763C76A7480421DA036FFD0165034;6160.
+(rerunfilecheck)             Checksum: CCB794E7DB850DCD9F732BB2ED2291E3;6564.
  ) 
 Here is how much of TeX's memory you used:
- 17050 strings out of 479081
- 263312 string characters out of 2862524
- 621767 words of memory out of 3000000
- 34098 multiletter control sequences out of 15000+600000
- 478030 words of font info for 153 fonts, out of 8000000 for 9000
+ 17051 strings out of 479081
+ 263377 string characters out of 2862524
+ 622861 words of memory out of 3000000
+ 34102 multiletter control sequences out of 15000+600000
+ 477420 words of font info for 148 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,14n,80p,1205b,567s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 75i,13n,80p,1274b,571s stack positions out of 5000i,500n,10000p,200000b,80000s
 {D:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc}{D:/Program Files/MiKTeX
 /fonts/enc/dvips/lm/lm-ec.enc}{D:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ma
 thsy.enc}{D:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}<C:/Users/Li/Ap
@@ -1085,9 +1072,9 @@ rogram Files/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><D:/Program Files/MiKTeX
 /fonts/type1/public/lm/lmsso10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/
 lm/lmsy10.pfb><D:/Program Files/MiKTeX/fonts/type1/urw/helvetic/uhvb8a.pfb><D:/
 Program Files/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on User_guide_pdf.pdf (14 pages, 671456 bytes).
+Output written on User_guide_pdf.pdf (14 pages, 668862 bytes).
 PDF statistics:
- 395 PDF objects out of 1000 (max. 8388607)
- 143 named destinations out of 1000 (max. 500000)
- 28949 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 411 PDF objects out of 1000 (max. 8388607)
+ 150 named destinations out of 1000 (max. 500000)
+ 28965 words of extra memory for PDF output out of 29859 (max. 10000000)
 

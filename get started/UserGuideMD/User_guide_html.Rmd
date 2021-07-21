@@ -1,7 +1,7 @@
 ---
 title: "NetID User Guide"
 author: "Li Chen, Ziyang Chen"
-date: "2021/6/1"
+date: "2021/7/21"
 # output:
 #    html_document:
 #      toc: true
@@ -14,12 +14,12 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-A primary goal of liquid chromatography-high resolution mass spectrometry (LC-MS)-based metabolomics is to identify all metabolites, but most LC-MS peaks remain unidentified. Here, we present a global network optimization approach, NetID, to annotate untargeted LC-MS metabolomics data. We consider all experimentally observed ion peaks together, and assign annotations to all of them simultaneously so as to maximize a score that considers properties of peaks (known masses, retention times, MS/MS fragmentation patterns). Global optimization results in accurate peak assignment and trackable peak-peak relationships in the output network. Applying this approach to yeast and mouse data, we identify 5 novel metabolites, including thiamine and taurine derivatives. Isotope tracer studies indicate active flux through these metabolites. Thus, NetID applies existing metabolomic knowledge and global optimization to annotate untargeted metabolomics data, revealing novel metabolites.   
+Liquid chromatography-high resolution mass spectrometry (LC-MS)-based metabolomics aims to identify and quantitate all metabolites, but most LC-MS peaks remain unidentified. Here, we present a global network optimization approach, NetID, to annotate untargeted LC-MS metabolomics data. The approach aims to generate, for all experimentally observed ion peaks, annotations that match the measured masses, retention times, and (when available) MS/MS fragmentation patterns. Peaks are connected based on mass differences reflecting adducting, fragmentation, isotopes, or feasible biochemical transformations. Global optimization generates a single network linking most observed ion peaks, enhances peak assignment accuracy, and produces chemically-informative peak-peak relationships, including for peaks lacking MS/MS spectra. Applying this approach to yeast and mouse data, we identified five previously unrecognized metabolites (thiamine derivatives and N-glucosyl-taurine). Isotope tracer studies indicate active flux through these metabolites. Thus, NetID applies existing metabolomic knowledge and global optimization to substantially improve annotation coverage and accuracy in untargeted metabolomics datasets, facilitating metabolite discovery. 
 
-NetID requires (1) a peak table containing m/z, RT and intensity from high-resolution mass spectrometry data. (2) a reference compound database, which we provide HMDB, YMDB, a lite version of PubChem (PubChemLite.0.2.0) and a subset of 47,101 biopathway related entries (PubChemLite_Bio) for user to choose. (3) a transformation table, which we assembled a list of 25 biochemical atom differences and 59 abiotic atom differences. NetID optionally use (4) a list of excel files containing MS2 fragmentation information (m/z and intensity) for peaks in the above peak table. (5) a list of known metabolites’ retention time, which we provide our in-house retention time list for demonstration. Users can customize the compound database, the transformation table and the retention time list following the user guide. 
+NetID requires (1) a peak table (in .csv format) containing m/z, RT and intensity from high-resolution mass spectrometry data; (2) a reference compound database, for which we provide HMDB, YMDB, a lite version of PubChem (PubChemLite.0.2.0) and a subset of 47,101 biopathway related entries (PubChemLite_Bio) that the user may choose; and. (3) a transformation table (in .csv format), for which we assembled a list of 25 biochemical atom differences and 59 abiotic atom differences. NetID optionally use (4) a list of excel files containing MS2 fragmentation information (m/z and intensity) for peaks in the above peak table and (5) a list of known metabolites’ retention time, for which we provide our in-house retention time list for demonstration. Users can customize the compound database, the transformation table and the retention time list following the user guide. 
 Currently the algorithm is developed using Thermo Orbitrap instruments results. We anticipate the algorithm will work for other high mass accuracy data, such as TOF data, but parameters may need to be optimized for the best performance.  
 
-Citation: https://www.biorxiv.org/content/10.1101/2021.01.06.425569v1  
+Citation: https://www.biorxiv.org/content/10.1101/2021.01.06.425569
 Git-hub: https://github.com/LiChenPU/NetID
 
 # Environment Setup
@@ -51,18 +51,25 @@ This section provides step-by-step instructions to set up the environment to run
 
 ## Package dependency installation
 
-Most of the dependent packages can be installed by running the R script `NetID_packages.R` in the `get started` folder. See **Troubleshooting** section for possible errors.
+### Install common packages
+1. Open the R script `NetID_packages.R` in `get started` folder.
 
+2. Run all lines. 
+
+3. Run all lines again. If you see "No new packages added...", then it means all packages are successfully installed.
+
+### Install cplexAPI 
 The package, **cplexAPI**, connecting R to CPLEX, requires additional installation steps.
 
 1. Go to website: <https://cran.r-project.org/web/packages/cplexAPI/index.html>, look for `Package source`, and download `cplexAPI_1.4.0.tar.gz`. In the same page, look for `Materials`, a package installation guide can be found in the link `INSTALL`. 
 
 2. Unzip the folder `cplexAPI` to the **desktop**, open subfolder `src`, follow the installation guide to modify the file `Makevars.win`.  
-*Note*: Replace `\` in the `Makevars.win` file into `/` in order for R to recognize the path.  
-    * For example, the `-I"${CPLEX_STUDIO_DIR}\cplex\include"` should be replaced with the path CPLEX_studio is installed, such as:  
+**Note**: Replace `\` in the `Makevars.win` file into `/` in order for R to recognize the path.  
+    * For example, the `-I"${CPLEX_STUDIO_DIR}\cplex\include"` needs to be replaced with the path CPLEX_studio is installed, such as:  
     `-I"C:/Program Files/IBM/ILOG/CPLEX_Studio1210/cplex/include"`   
-    * The `-L"${CPLEX_STUDIO_LIB}"` should be replaced with the path CPLEX_studio is installed, such as:  
+    * The `-L"${CPLEX_STUDIO_LIB}"` needs to be replaced with the path CPLEX_studio is installed, such as:  
     `-L"C:/Program Files/IBM/ILOG/CPLEX_Studio1210/cplex/bin/x64_win64"`
+    * The last part "-lcplexXXX" needs to be replaced with specific version code. For example, use "-lcplex12100" for CPLEX_Studio1210, and "-lcplex2010" for CPLEX_Studio201
 
 3. build package, 
     * In command line, change `${Username}` to the actual user name and run line below, 
@@ -74,20 +81,21 @@ The package, **cplexAPI**, connecting R to CPLEX, requires additional installati
 
     a new package `cplexAPI_1.4.0.tar.gz` will be built under the default path (for example, `C:\Users\${Username}`)
 
-    *Note*: You need to add R and Rtools40 to Environmental Variables PATH, with instruction provided at the end. 
+    **Note**: You need to add R and Rtools40 to Environmental Variables PATH, with instruction provided at the end. 
 
 4. In command line, run line below to install package.  
 `R CMD INSTALL --build --no-multiarch .\cplexAPI_1.4.0.tar.gz`  
 If you see `DONE (cplexAPI)`, then the package installation is successful.  
-    * *Note*: if error occurs relating to `__declspec(dllimport deprecated)`, you need to go to `C:\Program Files\IBM\ILOG\CPLEX_Studio1210\cplex\include\ilcplex` (or other installation path), open the file `cpxconst.h`, go to the line indicated in the error message or search for `__declspec(dllimport deprecated)`, add `_` to `__declspec(dllimport deprecated)`, making it to `__declspec(dllimport_deprecated)`. Save file and repeat *step 4*.
+    **Note**: if error occurs relating to `__declspec(dllimport deprecated)`, you need to go to `C:\Program Files\IBM\ILOG\CPLEX_Studio1210\cplex\include\ilcplex` (or your own installation folder), open the file `cpxconst.h`, go to the line indicated in the error message or search for `__declspec(dllimport deprecated)`, add `_` in between, make it to `__declspec(dllimport_deprecated)`. Save file and repeat *step 4*.
 
 5. To test if cplexAPI is installed properly and to take a short venture using CPLEX in R, refer to **Package cplexAPI – Quick Start** in <https://cran.r-project.org/web/packages/cplexAPI/index.html>.
 
 # Using NetID
 This section will use yeast negative-mode dataset and mouse liver negative-mode dataset as examples to walk through the NetID workflow.
 
-* *Note 1: If other El-MAVEN version was used, check the “raw_data.csv” for the column number where the first sample is located, and specify that in the NetID_run_script.R file. For example, In El-MAVEN (version 7.0), first_sample_col_num is set at 15 as default. If El-MAVEN (version 12.0) is used, first_sample_col_num should be set at 16.*
-* *Note 2: for more advanced uses, scoring and other parameters can be edited in NetID_function.R and NetID_run_script.R. Read the manuscript method section for detailed explanation on parameters.*
+**Note 1**: If other El-MAVEN version was used, check the “raw_data.csv” for the column number where the first sample is located, and specify that in the NetID_run_script.R file. For example, In El-MAVEN (version 7.0), first_sample_col_num is set at 15 as default. If El-MAVEN (version 12.0) is used, first_sample_col_num should be set at 16. 
+
+**Note 2**: for more advanced uses, scoring and other parameters can be edited in NetID_function.R and NetID_run_script.R. Read the manuscript method section for detailed explanation on parameters.*
 
 ## Yeast negative-mode dataset
 
@@ -373,7 +381,7 @@ or
 3. You may need to restart computer for the R path to take effect.
 
 ## Add **Rtools40** to `PATH`
-1. Add the path `C:\Rtools\bin` to the `Path Variable `in `Environment Variables`
+1. Search in the Rtools folder (e.g. `C:\Rtools`) for `sh.exe`, and copy its folder path (e.g. `C:\Rtools\usr\bin`) to the `Path Variable `in `Environment Variables`
 
 2. Run the line in **R**:   
 `writeLines('PATH="${RTOOLS40_HOME}\\usr\\bin;${PATH}"', con = "~/.Renviron")`  
