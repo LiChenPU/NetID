@@ -209,7 +209,7 @@ FDR_Calculator <- function(decoy_address, output_address,
     anns_elements <- sapply(anns, function(x) unlist(strsplit(x, "\\d+")))
     decoys <- sapply(anns_elements, function(x) sum(unlist(x) %in% imp_elements))
     FP <- length(which(decoys > 0)) * (f - 1)
-    FDR <- FP / (length(anns) - FP)
+    FDR <- FP / (length(anns))
 }
 
 NetID <- function(work_dir, file_name, ion_mode, decoy_lib) {
