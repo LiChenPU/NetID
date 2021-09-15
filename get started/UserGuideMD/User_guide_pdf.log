@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.31)  21 JUL 2021 21:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.31)  10 AUG 2021 20:00
 entering extended mode
 **./User_guide_pdf.tex
 (User_guide_pdf.tex
@@ -987,12 +987,12 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
 [10]
-<f1.png, id=290, 498.663pt x 87.7095pt>
+<f1.png, id=289, 498.663pt x 87.7095pt>
 File: f1.png Graphic file (type png)
 <use f1.png>
 Package pdftex.def Info: f1.png  used on input line 756.
 (pdftex.def)             Requested size: 384.11626pt x 67.56194pt.
-<f2.png, id=292, 354.123pt x 85.0815pt>
+<f2.png, id=291, 354.123pt x 85.0815pt>
 File: f2.png Graphic file (type png)
 <use f2.png>
 Package pdftex.def Info: f2.png  used on input line 773.
@@ -1006,7 +1006,7 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
 [11 <./f1.png>]
-<f3.png, id=312, 668.4975pt x 634.62094pt>
+<f3.png, id=311, 668.4975pt x 634.62094pt>
 File: f3.png Graphic file (type png)
 <use f3.png>
 Package pdftex.def Info: f3.png  used on input line 783.
@@ -1020,7 +1020,7 @@ Package fancyhdr Warning: \headheight is too small (42.67912pt):
 (fancyhdr)                \addtolength{\topmargin}{-3.60004pt}.
 
 [12 <./f2.png> <./f3.png>]
-<f4.png, id=321, 384.4764pt x 317.5062pt>
+<f4.png, id=320, 384.4764pt x 317.5062pt>
 File: f4.png Graphic file (type png)
 <use f4.png>
 Package pdftex.def Info: f4.png  used on input line 808.
@@ -1055,13 +1055,13 @@ Package rerunfilecheck Info: File `User_guide_pdf.out' has not changed.
 (rerunfilecheck)             Checksum: CCB794E7DB850DCD9F732BB2ED2291E3;6564.
  ) 
 Here is how much of TeX's memory you used:
- 17051 strings out of 479081
- 263377 string characters out of 2862524
- 622861 words of memory out of 3000000
+ 17053 strings out of 479081
+ 263403 string characters out of 2862524
+ 622802 words of memory out of 3000000
  34102 multiletter control sequences out of 15000+600000
- 477420 words of font info for 148 fonts, out of 8000000 for 9000
+ 477556 words of font info for 149 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,13n,80p,1274b,571s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 75i,13n,80p,1274b,569s stack positions out of 5000i,500n,10000p,200000b,80000s
 {D:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc}{D:/Program Files/MiKTeX
 /fonts/enc/dvips/lm/lm-ec.enc}{D:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ma
 thsy.enc}{D:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}<C:/Users/Li/Ap
@@ -1072,9 +1072,9 @@ rogram Files/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><D:/Program Files/MiKTeX
 /fonts/type1/public/lm/lmsso10.pfb><D:/Program Files/MiKTeX/fonts/type1/public/
 lm/lmsy10.pfb><D:/Program Files/MiKTeX/fonts/type1/urw/helvetic/uhvb8a.pfb><D:/
 Program Files/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on User_guide_pdf.pdf (14 pages, 668862 bytes).
+Output written on User_guide_pdf.pdf (14 pages, 668545 bytes).
 PDF statistics:
- 411 PDF objects out of 1000 (max. 8388607)
+ 410 PDF objects out of 1000 (max. 8388607)
  150 named destinations out of 1000 (max. 500000)
  28965 words of extra memory for PDF output out of 29859 (max. 10000000)
 

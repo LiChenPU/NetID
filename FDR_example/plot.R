@@ -51,7 +51,7 @@ load("FDR.RData")
   ## Plot ####
   {
     p_all_precision = ggplot(data = gt_all, mapping = aes(x = method, y = precision, color = method)) + 
-      geom_boxplot() + #geom_point(data = stan, mapping = aes(x = method, y = precision, fill = method), shape = 22, color = "black") +
+      geom_boxplot(outlier.shape = NA) + #geom_point(data = stan, mapping = aes(x = method, y = precision, fill = method), shape = 22, color = "black") +
       geom_point(alpha = 1 / 5, position = "jitter") +
       # ggtitle("Precision by Ground Truth") + 
       theme_classic(base_size = 12 # edit font size for all non-data text
@@ -76,7 +76,7 @@ load("FDR.RData")
       facet_wrap(~ library, nrow = 2) #+coord_flip()
     
     p1_precision = ggplot(data = gt_all %>% filter(library=="HMDB"), mapping = aes(x = method, y = precision, color = method)) + 
-      geom_boxplot() + #geom_point(data = stan, mapping = aes(x = method, y = precision, fill = method), shape = 22, color = "black") +
+      geom_boxplot(outlier.shape = NA) + #geom_point(data = stan, mapping = aes(x = method, y = precision, fill = method), shape = 22, color = "black") +
       geom_point(alpha = 1 / 5, position = "jitter") +
       # ggtitle("Precision by Ground Truth") +
       # guides(color = F) +
@@ -147,7 +147,7 @@ load("FDR.RData")
   ## Plot ####
   {
     p_all_FDR = ggplot(data = fdr_all, mapping = aes(x = method, y = FDR, color = method)) + 
-      geom_boxplot() + #geom_point(data = stan, mapping = aes(x = method, y = precision, fill = method), shape = 22, color = "black") +
+      geom_boxplot(outlier.shape = NA) + #geom_point(data = stan, mapping = aes(x = method, y = precision, fill = method), shape = 22, color = "black") +
       geom_point(alpha = 1 / 5, position = "jitter") +
       # ggtitle("Precision by Ground Truth") + 
       theme_classic(base_size = 12 # edit font size for all non-data text
@@ -172,7 +172,7 @@ load("FDR.RData")
       facet_wrap(~ library, nrow = 2) #+coord_flip()
     
     p1_FDR = ggplot(data = fdr_all %>% filter(library=="HMDB"), mapping = aes(x = method, y = FDR, color = method)) + 
-      geom_boxplot() + #geom_point(data = stan, mapping = aes(x = method, y = precision, fill = method), shape = 22, color = "black") +
+      geom_boxplot(outlier.shape = NA) + #geom_point(data = stan, mapping = aes(x = method, y = precision, fill = method), shape = 22, color = "black") +
       geom_point(alpha = 1 / 5, position = "jitter") +
       # ggtitle("Precision by Ground Truth") + 
       guides(color = guide_legend(

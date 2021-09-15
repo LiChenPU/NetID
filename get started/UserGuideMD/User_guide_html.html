@@ -11,6 +11,7 @@
 
 <meta name="author" content="Li Chen, Ziyang Chen" />
 
+<meta name="date" content="2021-09-15" />
 
 <title>NetID User Guide</title>
 
@@ -1852,7 +1853,7 @@ function toggle_visibility(id1) {
 
 <h1 class="title toc-ignore">NetID User Guide</h1>
 <p class="author-name">Li Chen, Ziyang Chen</p>
-<h4 class="date">2021/7/21</h4>
+<h4 class="date">15 September 2021</h4>
 
 </div>
 
@@ -1860,7 +1861,7 @@ function toggle_visibility(id1) {
 <p>Liquid chromatography-high resolution mass spectrometry (LC-MS)-based metabolomics aims to identify and quantitate all metabolites, but most LC-MS peaks remain unidentified. Here, we present a global network optimization approach, NetID, to annotate untargeted LC-MS metabolomics data. The approach aims to generate, for all experimentally observed ion peaks, annotations that match the measured masses, retention times, and (when available) MS/MS fragmentation patterns. Peaks are connected based on mass differences reflecting adducting, fragmentation, isotopes, or feasible biochemical transformations. Global optimization generates a single network linking most observed ion peaks, enhances peak assignment accuracy, and produces chemically-informative peak-peak relationships, including for peaks lacking MS/MS spectra. Applying this approach to yeast and mouse data, we identified five previously unrecognized metabolites (thiamine derivatives and N-glucosyl-taurine). Isotope tracer studies indicate active flux through these metabolites. Thus, NetID applies existing metabolomic knowledge and global optimization to substantially improve annotation coverage and accuracy in untargeted metabolomics datasets, facilitating metabolite discovery.</p>
 <p>NetID requires (1) a peak table (in .csv format) containing m/z, RT and intensity from high-resolution mass spectrometry data; (2) a reference compound database, for which we provide HMDB, YMDB, a lite version of PubChem (PubChemLite.0.2.0) and a subset of 47,101 biopathway related entries (PubChemLite_Bio) that the user may choose; and. (3) a transformation table (in .csv format), for which we assembled a list of 25 biochemical atom differences and 59 abiotic atom differences. NetID optionally use (4) a list of excel files containing MS2 fragmentation information (m/z and intensity) for peaks in the above peak table and (5) a list of known metabolites’ retention time, for which we provide our in-house retention time list for demonstration. Users can customize the compound database, the transformation table and the retention time list following the user guide.
 Currently the algorithm is developed using Thermo Orbitrap instruments results. We anticipate the algorithm will work for other high mass accuracy data, such as TOF data, but parameters may need to be optimized for the best performance.</p>
-<p>Citation: <a href="https://www.biorxiv.org/content/10.1101/2021.01.06.425569" class="uri">https://www.biorxiv.org/content/10.1101/2021.01.06.425569</a>
+<p>Citation: <a href="https://www.biorxiv.org/content/10.1101/2021.01.06.425569" class="uri">https://www.biorxiv.org/content/10.1101/2021.01.06.425569</a><br />
 Git-hub: <a href="https://github.com/LiChenPU/NetID" class="uri">https://github.com/LiChenPU/NetID</a></p>
 <div id="environment-setup" class="section level1">
 <h1><span class="header-section-number">1</span> Environment Setup</h1>
@@ -2073,7 +2074,7 @@ Set up the <strong>QExactive</strong> instrument so that it contains both “Ful
 <li><p>MS2 file conversion.<br />
 <strong>RawConverte</strong>r (version 1.2.0.1, <a href="http://fields.scripps.edu/rawconv/" class="uri">http://fields.scripps.edu/rawconv/</a>) is used to convert the <code>.raw</code> file into <code>.mzXML</code> file that contains MS2 information. Keep the default parameters except setting <code>Environment Type</code> as <code>Data Independent</code>, and <code>Output Formats</code> as <code>mzXML</code>.</p></li>
 <li><p>MS2 reading and cleaning.<br />
-A matlab code is used for MS2 reading and cleaning, which can be found in <strong>CodeOcean</strong> as a published capsule (<a href="https://codeocean.com/capsule/1048398/tree/v1" class="uri">https://codeocean.com/capsule/1048398/tree/v1</a>). The <code>csv</code> files from <em>1</em> paired with the MS2 data files in <code>mzXML</code> format from <em>3</em> are the required input data. Refer to capsule description and <code>readme.md</code> file for more details of how the code works. In Brief,</p>
+A matlab code is used for MS2 reading and cleaning, which can be found in <strong>CodeOcean</strong> as a published capsule (<a href="https://codeocean.com/capsule/1048398/" class="uri">https://codeocean.com/capsule/1048398/</a>). The <code>csv</code> files from <em>1</em> paired with the MS2 data files in <code>mzXML</code> format from <em>3</em> are the required input data. Refer to capsule description and <code>readme.md</code> file for more details of how the code works. In Brief,</p>
 <ul>
 <li>Prepare filename. Filenames for both csv and mzXML files should be named as <code>prefixNNN</code>, where prefix is the given file name and NNN is the 3 digits number in continuous order (e.g. <code>M001.csv</code>, <code>M002.csv</code>,… and <code>M001.mzXML</code>, <code>M002.mzXML</code>,… in the <code>/data</code> folder).<br />
 </li>

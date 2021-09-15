@@ -1,7 +1,7 @@
 ---
 title: "NetID User Guide"
 author: "Li Chen, Ziyang Chen"
-date: "2021/7/21"
+# date: "2021/7/21"
 # output:
 #    html_document:
 #      toc: true
@@ -14,12 +14,12 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Liquid chromatography-high resolution mass spectrometry (LC-MS)-based metabolomics aims to identify and quantitate all metabolites, but most LC-MS peaks remain unidentified. Here, we present a global network optimization approach, NetID, to annotate untargeted LC-MS metabolomics data. The approach aims to generate, for all experimentally observed ion peaks, annotations that match the measured masses, retention times, and (when available) MS/MS fragmentation patterns. Peaks are connected based on mass differences reflecting adducting, fragmentation, isotopes, or feasible biochemical transformations. Global optimization generates a single network linking most observed ion peaks, enhances peak assignment accuracy, and produces chemically-informative peak-peak relationships, including for peaks lacking MS/MS spectra. Applying this approach to yeast and mouse data, we identified five previously unrecognized metabolites (thiamine derivatives and N-glucosyl-taurine). Isotope tracer studies indicate active flux through these metabolites. Thus, NetID applies existing metabolomic knowledge and global optimization to substantially improve annotation coverage and accuracy in untargeted metabolomics datasets, facilitating metabolite discovery. 
+Liquid chromatography-high resolution mass spectrometry (LC-MS)-based metabolomics aims to identify and quantitate all metabolites, but most LC-MS peaks remain unidentified. Here, we present a global network optimization approach, NetID, to annotate untargeted LC-MS metabolomics data. The approach aims to generate, for all experimentally observed ion peaks, annotations that match the measured masses, retention times, and (when available) MS/MS fragmentation patterns. Peaks are connected based on mass differences reflecting adducting, fragmentation, isotopes, or feasible biochemical transformations. Global optimization generates a single network linking most observed ion peaks, enhances peak assignment accuracy, and produces chemically-informative peak-peak relationships, including for peaks lacking MS/MS spectra. Applying this approach to yeast and mouse data, we identified five previously unrecognized metabolites (thiamine derivatives and N-glucosyl-taurine). Isotope tracer studies indicate active flux through these metabolites. Thus, NetID applies existing metabolomic knowledge and global optimization to substantially improve annotation coverage and accuracy in untargeted metabolomics datasets, facilitating metabolite discovery.
 
 NetID requires (1) a peak table (in .csv format) containing m/z, RT and intensity from high-resolution mass spectrometry data; (2) a reference compound database, for which we provide HMDB, YMDB, a lite version of PubChem (PubChemLite.0.2.0) and a subset of 47,101 biopathway related entries (PubChemLite_Bio) that the user may choose; and. (3) a transformation table (in .csv format), for which we assembled a list of 25 biochemical atom differences and 59 abiotic atom differences. NetID optionally use (4) a list of excel files containing MS2 fragmentation information (m/z and intensity) for peaks in the above peak table and (5) a list of known metabolites’ retention time, for which we provide our in-house retention time list for demonstration. Users can customize the compound database, the transformation table and the retention time list following the user guide. 
 Currently the algorithm is developed using Thermo Orbitrap instruments results. We anticipate the algorithm will work for other high mass accuracy data, such as TOF data, but parameters may need to be optimized for the best performance.  
 
-Citation: https://www.biorxiv.org/content/10.1101/2021.01.06.425569
+Citation: https://www.biorxiv.org/content/10.1101/2021.01.06.425569  
 Git-hub: https://github.com/LiChenPU/NetID
 
 # Environment Setup
@@ -195,7 +195,7 @@ Set up the **QExactive** instrument so that it contains both “Full MS” and �
 **RawConverte**r (version 1.2.0.1, <http://fields.scripps.edu/rawconv/>) is used to convert the `.raw` file into `.mzXML` file that contains MS2 information. Keep the default parameters except setting `Environment Type` as `Data Independent`, and `Output Formats` as `mzXML`.
 
 4. MS2 reading and cleaning.  
-A matlab code is used for MS2 reading and cleaning, which can be found in **CodeOcean** as a published capsule (<https://codeocean.com/capsule/1048398/tree/v1>). The `csv` files from *1* paired with the MS2 data files in `mzXML` format from *3* are the required input data. Refer to capsule description and `readme.md` file for more details of how the code works. In Brief,  
+A matlab code is used for MS2 reading and cleaning, which can be found in **CodeOcean** as a published capsule (<https://codeocean.com/capsule/1048398/>). The `csv` files from *1* paired with the MS2 data files in `mzXML` format from *3* are the required input data. Refer to capsule description and `readme.md` file for more details of how the code works. In Brief,  
     * Prepare filename. Filenames for both csv and mzXML files should be named as `prefixNNN`, where prefix is the given file name and NNN is the 3 digits number in continuous order (e.g. `M001.csv`, `M002.csv`,… and `M001.mzXML`, `M002.mzXML`,… in the `/data` folder).  
     * Duplicate the capsule to your own account so you can edit and use the capsule. Upload your own files and remove the previous files in `/data` folder.  
     * Specify the prefix and the range of numbers at the beginning section of the main code `Main_example.m`.  
