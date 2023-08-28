@@ -1,0 +1,41 @@
+Setting up NodeSet and EdgeSet...
+[1] "4698 positive nodes"
+
+           Adduct      Biotransform          Fragment Natural_abundance           Radical 
+            11436             10386              1163             13546               803 
+Setting up LibrarySet and StructureSet...
+start EdgeSet_expand...
+[1] "oligomer_multicharge 616"
+[1] "experiment_MS2_fragment 4418"
+[1] "library_MS2_fragment 7"
+Candidate formula pool propagation and scoring...
+[1] "Step 1 elapsed="
+Time difference of 3.002357 secs
+[1] "Step 2 elapsed="
+Time difference of 7.80077 secs
+[1] "Step 0.01 elapsed="
+Time difference of 14.06339 secs
+[1] "Step 0.02 elapsed="
+Time difference of 22.67352 secs
+[1] "Step 0.03 elapsed="
+Time difference of 43.21347 secs
+[1] "Step 1.01 elapsed="
+Time difference of 53.27512 secs
+[1] "Step 1.02 elapsed="
+Time difference of 1.050169 mins
+[1] "Step 1.03 elapsed="
+Time difference of 1.353502 mins
+setting up CplexSet...
+[1] "Finish CplexSet initialization"
+[1] "Finish CplexSet scoring"
+[1] "Complexity is 305819 variables and 420716 constraints."
+     nc      nr CPX_MAX     obj     rhs   sense     beg     cnt     ind     val      lb      ub 
+      1       1       1  305819  420716  420716  305819  305819  961001  961001  305819  305819 
+  ctype     mat 
+ 305819       6 
+Run optimization...
+[1] "Optimization ended successfull - optimal  - OBJ_value = 1920.95"
+105.22 sec elapsed
+path annotation...
+Time difference of 3.126509 mins
+NetID total run time:Time difference of 9.425016 mins

@@ -1,0 +1,8 @@
+category,num,note
+Total peaks from peak picking,8432,
+  Peaks defined bad by EVA algorithm,2223,
+  Peaks with high signal in blank samples,0,sample < 2 fold blank signal
+  Peaks that have high variation in QC samples,0,QC rel variation > 0.5
+  Peaks that have low average intensity,0,average sample signal < 500
+  Peaks that are duplicated due to peak picking algorithm,360,
+Total clean-up peaks,5885,

@@ -1,0 +1,14 @@
+.Rproj.user
+.Rhistory
+*.RData
+.Ruserdata
+*.DS_Store
+*.raw
+data/QTOF_6600_demo/pos/raw_data/*
+!data/QTOF_6600_demo/pos/raw_data/.gitkeep
+data/QTOF_6600_demo/neg/raw_data/*
+!data/QTOF_6600_demo/neg/raw_data/.gitkeep
+data/QE_480_demo/pos/raw_data/*
+!data/QE_480_demo/pos/raw_data/.gitkeep
+data/QE_480_demo/neg/raw_data/*
+!data/QE_480_demo/neg/raw_data/.gitkeep

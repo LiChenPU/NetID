@@ -1,0 +1,22 @@
+INFO [2023-08-23 14:43:03] $x
+INFO [2023-08-23 14:43:03] list(EVA_remove = s %>% filter(EVA_remove) %>% pull(id), duplicated_peaks = s %>% 
+INFO [2023-08-23 14:43:03]     filter(is_duplicate) %>% pull(id), high_blank = s %>% filter(high_blank) %>% 
+INFO [2023-08-23 14:43:03]     pull(id), high_QC_var = s %>% filter(high_QC_var) %>% pull(id), 
+INFO [2023-08-23 14:43:03]     low_inten = s %>% filter(low_inten) %>% pull(id))
+INFO [2023-08-23 14:43:03] 
+INFO [2023-08-23 14:43:03] $filename
+INFO [2023-08-23 14:43:03] paste0(folder, "processing_file/VENN.png")
+INFO [2023-08-23 14:43:03] 
+INFO [2023-08-23 14:43:03] $imagetype
+INFO [2023-08-23 14:43:03] [1] "png"
+INFO [2023-08-23 14:43:03] 
+INFO [2023-08-23 14:43:03] $fill
+INFO [2023-08-23 14:43:03] RColorBrewer::brewer.pal(5, "Dark2")
+INFO [2023-08-23 14:43:03] 
+INFO [2023-08-23 14:43:03] $cat.just
+INFO [2023-08-23 14:43:03] list(l1 = c(0.5, 1.5), l2 = c(0, -5), l3 = c(0, 0), l4 = c(0, 
+INFO [2023-08-23 14:43:03]     0), l5 = c(1, -5))
+INFO [2023-08-23 14:43:03] 
+INFO [2023-08-23 14:43:03] $disable.logging
+INFO [2023-08-23 14:43:03] F
+INFO [2023-08-23 14:43:03] 
